@@ -1,5 +1,5 @@
 # cs509-project
-Simple test of commit from Eclipse
-Pull test
-Push test
-Kartik test
+
+Interesting documentation:
+> Git:
+	> http://wiki.eclipse.org/EGit/User_Guide
