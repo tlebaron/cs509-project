@@ -1,3 +1,4 @@
+import java.util.Date;
 
 public class Flight {
 	public Airport departureAirport;
@@ -9,9 +10,9 @@ public class Flight {
 	public Airplane airplane;
 	
 	//TODO how to save time? do we separate day, month, time, ...
-	public double departureTimeGMT;
-	public double arrivalTimeGMT;
-	public double departureTimeLocal;
-	public double arrivalTimeLocal;
+	public Date departureTimeGMT;
+	public Date arrivalTimeGMT;
+	public Date departureTimeLocal;
+	public Date arrivalTimeLocal;
 	
 }
