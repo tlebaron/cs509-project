@@ -1,8 +1,8 @@
 
 public class Airport {
-	public String name;
-	public String code;
-	public float latitude;
-	public float longitude;
+	public String airportName;
+	public String airportCode;
+	public double latitude;
+	public double longitude;
 	public int timeDifference;
 }
