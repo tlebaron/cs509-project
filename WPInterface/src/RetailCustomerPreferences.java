@@ -20,5 +20,7 @@ public class RetailCustomerPreferences {
 		* Date Type
 		* Class
 		*/
+		
+		System.out.println("What are your preferences??");
 	}
 }
