@@ -1,12 +1,12 @@
 
 public class Flight {
-	public String departureAirport;
-	public String arrivalAirport;
+	public Airport departureAirport;
+	public Airport arrivalAirport;
 	public int flightNumber;
 	public double flightTime;
-	public int coachSeating;
-	public int firstClassSeating;
-	public String airplane;
+	public Seats coachSeating;
+	public Seats firstClassSeating;
+	public Airplane airplane;
 	
 	//TODO how to save time? do we separate day, month, time, ...
 	public double departureTimeGMT;
