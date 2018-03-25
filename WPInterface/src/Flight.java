@@ -1,4 +1,5 @@
 import java.util.Date;
+import airport.Airport;
 
 public class Flight {
 	public Airport departureAirport;
