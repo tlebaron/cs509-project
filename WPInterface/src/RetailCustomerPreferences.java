@@ -23,6 +23,7 @@ public class RetailCustomerPreferences {
 		* Class
 		*/
 		
-		System.out.println("What are your preferences??");
+		System.out.println("Create preferences?");
+		
 	}
 }

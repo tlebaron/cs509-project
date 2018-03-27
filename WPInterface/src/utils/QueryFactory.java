@@ -3,12 +3,34 @@
  */
 package utils;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * @author blake
  * @version 1.2
  *
  */
 public class QueryFactory {
+	
+	/**
+	 * Return a query string that can be passed to HTTP URL to request list of flights
+	 * 
+	 * @param airportCode code of the airport
+	 * @param departureDate date of departure
+	 * @param teamName is the name of the team to specify the data copy on server
+	 * @return the query String which can be appended to URL to form HTTP GET request
+	 */
+	public static String getFlightsFromDeparture(String airportCode, Calendar departureDate, String teamName) {
+		String month = Integer.toString(departureDate.get(2));
+		if(month.length()<2) month = "0"+month;
+		String url = "?team=" + teamName + "&action=list"
+				+ "&list_type=departing"
+				+ "&airport="+airportCode+""
+				+ "&day="+departureDate.get(1)+"_"+month+"_"+departureDate.get(5);
+		
+		return url;
+	}
 	
 	/**
 	 * Return a query string that can be passed to HTTP URL to request list of airports

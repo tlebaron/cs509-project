@@ -3,6 +3,7 @@
  */
 package driver;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import airport.Airports;
 import airplane.Airplane;
 import airplane.Airplanes;
 import dao.ServerInterface;
+import flight.Flight;
+import flight.Flights;
 
 /**
  * @author blake
@@ -52,6 +55,15 @@ public class Driver {
 //		Collections.sort(airplanes);
 		for (Airplane airplane : airplanes) {
 			System.out.println(airplane.toString());
+		}
+		
+		System.out.println("\nprint flights leaving BOS on 2018 May 12");
+		Calendar departureDate = Calendar.getInstance();
+		departureDate.set(2018,5,12);
+		System.out.println("date : "+departureDate.get(1)+"_"+departureDate.get(2)+"_"+departureDate.get(5));
+		Flights flights = ServerInterface.INSTANCE.getFlights("BOS", departureDate, teamName);
+		for (Flight flight : flights){
+			System.out.println(flight.toString());
 		}
 	}
 }

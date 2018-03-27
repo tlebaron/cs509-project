@@ -41,7 +41,7 @@ public class Airplane {
 		
 		coachSeats = new Seats();
 		coachSeats.numberOfSeats = 0;
-		coachSeats.seatClass = SeatClass.ECONOMY;
+		coachSeats.seatClass = SeatClass.COACH;
 		coachSeats.price = 0;
 		
 		firstClassSeats = new Seats();
