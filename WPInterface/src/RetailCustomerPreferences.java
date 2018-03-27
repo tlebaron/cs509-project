@@ -1,5 +1,6 @@
 import java.util.Date;
 import airport.Airport;
+import seat.SeatClass;
 
 public class RetailCustomerPreferences {
 	public SeatClass tripClass;

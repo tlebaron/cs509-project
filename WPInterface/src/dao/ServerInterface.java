@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import airplane.Airplanes;
 import airport.Airports;
 import utils.QueryFactory;
 
@@ -83,6 +84,58 @@ public enum ServerInterface {
 		airports = DaoAirport.addAll(xmlAirports);
 		return airports;
 		
+	}
+	
+	/**
+	 * Return a collection of all airplanes from the server
+	 * Retrieve the list of airplanes available to the specified ticketAgency via HTTPGet of the server
+	 * @param teamName identifies the name of the team requesting the collection of airplanes
+	 * @return collection of Airplanes from server
+	 */
+	public Airplanes getAirplanes (String teamName) {
+
+		URL url;
+		HttpURLConnection connection;
+		BufferedReader reader;
+		String line;
+		StringBuffer result = new StringBuffer();
+		
+		String xmlAirplanes;
+		Airplanes airplanes;
+		try {
+			/**
+			 * Create an HTTP connection to the server for a GET 
+			 */
+			url = new URL(mUrlBase + QueryFactory.getAirplanes(teamName));
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("User-Agent", teamName);
+
+			/**
+			 * If response code of SUCCESS read the XML string returned
+			 * line by line to build the full return string
+			 */
+			int responseCode = connection.getResponseCode();
+			if (responseCode >= HttpURLConnection.HTTP_OK) {
+				InputStream inputStream = connection.getInputStream();
+				String encoding = connection.getContentEncoding();
+				encoding = (encoding == null ? "UTF-8" : encoding);
+
+				reader = new BufferedReader(new InputStreamReader(inputStream));
+				while ((line = reader.readLine()) != null) {
+					result.append(line);
+				}
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		xmlAirplanes = result.toString();
+		airplanes = DaoAirplane.addAll(xmlAirplanes);
+		return airplanes;
 	}
 	
 	/**

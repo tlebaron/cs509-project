@@ -1,3 +1,4 @@
+package seat;
 
 public class Seats {
 	public int price;

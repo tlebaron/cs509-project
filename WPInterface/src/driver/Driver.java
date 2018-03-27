@@ -4,9 +4,12 @@
 package driver;
 
 import java.util.Collections;
+import java.util.List;
 
 import airport.Airport;
 import airport.Airports;
+import airplane.Airplane;
+import airplane.Airplanes;
 import dao.ServerInterface;
 
 /**
@@ -19,6 +22,7 @@ public class Driver {
 	 * Entry point for CS509 sample code driver
 	 * 
 	 * This driver will retrieve the list of airports from the CS509 server and print the list 
+	 * It will also retrieve the list of airplanes from the CS509 server and print the list
 	 * to the console sorted by 3 character airport code
 	 * 
 	 * @param args is the arguments passed to java vm in format of "CS509.sample teamName" where teamName is a valid team
@@ -40,6 +44,14 @@ public class Driver {
 		Collections.sort(airports);
 		for (Airport airport : airports) {
 			System.out.println(airport.toString());
+		}
+		
+		System.out.println("\nprint airplanes\n");
+		// try print out airplanes to check if we are doing everything right
+		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
+//		Collections.sort(airplanes);
+		for (Airplane airplane : airplanes) {
+			System.out.println(airplane.toString());
 		}
 	}
 }
