@@ -44,6 +44,7 @@ public class Driver {
 		// Try to get a list of airports
 		Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
 		Collections.sort(airports);
+		
 		for (Airport airport : airports) {
 			System.out.println(airport.toString());
 		}
@@ -58,7 +59,7 @@ public class Driver {
 			gmtInterface.getOffset(a.latitude(), a.longitude(), userPreferences.getSearchDate());
 		}
 		**/
-		gmtInterface.getOffset(airports.get(0).latitude(), airports.get(0).longitude(), userPreferences.getSearchDate());
+		System.out.println(gmtInterface.getOffset(airports.get(0).latitude(), airports.get(0).longitude(), userPreferences.getSearchDate()));
 
 		System.out.println("Print airplanes");
 		// try print out airplanes to check if we are doing everything right

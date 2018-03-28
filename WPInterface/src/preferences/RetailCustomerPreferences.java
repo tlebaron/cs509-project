@@ -65,6 +65,10 @@ public class RetailCustomerPreferences {
 				System.out.println("Now please enter the return trip details.");
 				searchReturnDateType = getDateType(sc);
 				returnDate = getDate(sc);
+				while(returnDate.compareTo(searchDate) < 0) {
+					System.out.println("Your return date is before the departure date, please enter again!");
+					returnDate = getDate(sc);
+				}
 			}
 			tripClass = getTripClass(sc);
 		} catch (IOException e) {
@@ -75,23 +79,33 @@ public class RetailCustomerPreferences {
 
 	private SeatClass getTripClass(Scanner sc) throws IOException {
 		System.out.println("What is the Trip Class? (1 - Economy, 2 - First Class)");
-		int tripType = sc.nextInt();
-		switch (tripType) {
-		case 1: return SeatClass.ECONOMY;
-		case 2: return SeatClass.FIRSTCLASS;
-		default: System.out.println("The Trip Class you entered does not match the two available classes."); 
-			throw new IOException("Unknown trip class entered."); 
+		int tripClass = sc.nextInt();
+		while(true) {
+			switch (tripClass) {
+			case 1: return SeatClass.ECONOMY;
+			case 2: return SeatClass.FIRSTCLASS;
+			default: {
+				System.out.println("The Trip Class you entered does not match the two available classes.");
+				System.out.println("What is the Trip Class? (1 - Economy, 2 - First Class)");
+				tripClass = sc.nextInt();
+				}
+			}
 		}
 	}
 
-	private DateType getDateType(Scanner sc) throws IOException {
+	private DateType getDateType(Scanner sc)  {
 		System.out.println("What is the Date Type? (1 - Departure date, 2 - Arrival date)");
-		int tripType = sc.nextInt();
-		switch (tripType) {
-		case 1: return DateType.DEPARTURE;
-		case 2: return DateType.ARRIVAL;
-		default: System.out.println("The Date Type you entered does not match the two available types"); 
-			throw new IOException("Unknown trip type entered."); 
+		int dateType = sc.nextInt();
+		while(true) {
+			switch (dateType) {
+			case 1: return DateType.DEPARTURE;
+			case 2: return DateType.ARRIVAL;
+			default: {
+				System.out.println("The Date Type you entered does not match the two available types, try again.");
+				System.out.println("What is the Date Type? (1 - Departure date, 2 - Arrival date)");
+				dateType = sc.nextInt();
+				}
+			}
 		}
 	}
 
@@ -110,26 +124,35 @@ public class RetailCustomerPreferences {
 		return searchDate;
 	}
 
-	private Airport getAirport(Scanner sc, Airports airports, String type) throws IOException {
+	private Airport getAirport(Scanner sc, Airports airports, String type) {
 		System.out.println("What is the " + type + " airport?");
 		String departureAirport = sc.next().toUpperCase();
 		// validate that airport exists
-		for (Airport airport : airports) {
-			if(airport.code().equals(departureAirport)) {
-				return airport;
+		while(true) {
+			for (Airport airport : airports) {
+				if(airport.code().equals(departureAirport)) {
+					return airport;
+				}
 			}
+			System.out.println("The airport you entered does not match any airport on the database.");
+			System.out.println("What is the " + type + " airport?");
+			departureAirport = sc.next().toUpperCase();
 		}
-		throw new IOException("Invalid " + type + " airport entered.");
 	}
 
-	private TripType getTripType(Scanner sc) throws IOException {
+	private TripType getTripType(Scanner sc) {
 		System.out.println("What is yor trip type? (1 - OneWay, 2 - RoundTrip)");
 		int tripType = sc.nextInt();
-		switch (tripType) {
-		case 1: return TripType.ONEWAY;
-		case 2: return TripType.ROUNDTRIP;
-		default: System.out.println("The Trip Type you entered does not match the two available types"); 
-			throw new IOException("Unknown trip type entered."); 
+		while(true) {
+			switch (tripType) {
+			case 1: return TripType.ONEWAY;
+			case 2: return TripType.ROUNDTRIP;
+			default: {
+				System.out.println("The Trip Type you entered does not match the two available types, try again.");
+				System.out.println("What is your trip type? (1 - OneWay, 2 - RoundTrip)");
+				tripType = sc.nextInt();
+				}
+			}
 		}
 	}
 }
