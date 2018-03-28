@@ -10,6 +10,7 @@ import java.util.Date;
 
 import airport.Airport;
 import seat.SeatClass;
+import trip.TripType;
 import utils.QueryFactory;
 
 public class WPInterface {

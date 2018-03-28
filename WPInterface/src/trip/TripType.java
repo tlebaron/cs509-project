@@ -1,4 +1,4 @@
-package preferences;
+package trip;
 
 public enum TripType {
 	ONEWAY, ROUNDTRIP
