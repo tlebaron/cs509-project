@@ -61,13 +61,23 @@ public class Flight {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		
+		String departureHour = Integer.toString(departureTimeGMT.get(10));
+		if (departureHour.length()<2) departureHour = "0"+departureHour;
+		String departureMinute = Integer.toString(departureTimeGMT.get(12));
+		if (departureMinute.length()<2) departureMinute = "0"+departureMinute;
+		String arrivalHour = Integer.toString(arrivalTimeGMT.get(10));
+		if (arrivalHour.length()<2) arrivalHour = "0"+arrivalHour;
+		String arrivalMinute = Integer.toString(arrivalTimeGMT.get(12));
+		if (arrivalMinute.length()<2) arrivalMinute = "0"+arrivalMinute;
+		
 		//sb.append(manufacturer).append(", ");
 		//sb.append(Integer.toString(coachSeats.numberOfSeats)).append(", ");
 		sb.append("Flight "+Integer.toString(flightNumber)+" between "+departureAirport.code()+" and "+arrivalAirport.code());
-		sb.append(" has a time of "+Integer.toString(flightTime)+". ");
+		sb.append(" has a time of "+Integer.toString(flightTime)+" minutes. ");
 		sb.append("It has "+Integer.toString(coachSeating.numberOfSeats)+" coach seats and "+Integer.toString(firstClassSeating.numberOfSeats)+" first class seats. ");
-		sb.append("The depart is "+departureTimeGMT.get(2)+"/"+departureTimeGMT.get(5)+"/"+departureTimeGMT.get(1)+" at "+departureTimeGMT.get(10)+":"+departureTimeGMT.get(12));
-		sb.append(" and the arrival is "+arrivalTimeGMT.get(2)+"/"+arrivalTimeGMT.get(5)+"/"+arrivalTimeGMT.get(1)+" at "+arrivalTimeGMT.get(10)+":"+arrivalTimeGMT.get(12)+", time in GMT");
+		sb.append("The depart is "+departureTimeGMT.get(2)+"/"+departureTimeGMT.get(5)+"/"+departureTimeGMT.get(1)+" at "+departureHour+":"+departureMinute);
+		sb.append(" and the arrival is "+arrivalTimeGMT.get(2)+"/"+arrivalTimeGMT.get(5)+"/"+arrivalTimeGMT.get(1)+" at "+arrivalHour+":");
+		sb.append(arrivalMinute+", time in GMT");
 
 		return sb.toString();
 	}
