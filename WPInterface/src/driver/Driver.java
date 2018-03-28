@@ -14,6 +14,8 @@ import airplane.Airplanes;
 import dao.ServerInterface;
 import flight.Flight;
 import flight.Flights;
+import preferences.RetailCustomerPreferences;
+import timeconversion.GMTConversionInterface;
 
 /**
  * @author blake
@@ -21,6 +23,8 @@ import flight.Flights;
  */
 public class Driver {
 
+	static RetailCustomerPreferences userPreferences;
+	static GMTConversionInterface gmtInterface;
 	/**
 	 * Entry point for CS509 sample code driver
 	 * 
@@ -31,14 +35,9 @@ public class Driver {
 	 * @param args is the arguments passed to java vm in format of "CS509.sample teamName" where teamName is a valid team
 	 */
 	public static void main(String[] args) {
-		System.out.println("print airports\n");
-		/*
-		if (args.length != 1) {
-			System.err.println("usage: CS509.sample teamName");
-			System.exit(-1);
-			return;
-		}
-		*/
+		
+		userPreferences = new RetailCustomerPreferences();
+		gmtInterface = new GMTConversionInterface();
 		
 		//String teamName = args[0];
 		String teamName = "Team1";
@@ -49,7 +48,19 @@ public class Driver {
 			System.out.println(airport.toString());
 		}
 		
-		System.out.println("\nprint airplanes\n");
+		userPreferences.getRetailCustomerPreferences(airports);
+		
+		System.out.println("Print User Preferences");
+		userPreferences.printRetailCustomerPreferences();
+		
+		/**
+		for(Airport a : airports) {
+			gmtInterface.getOffset(a.latitude(), a.longitude(), userPreferences.getSearchDate());
+		}
+		**/
+		gmtInterface.getOffset(airports.get(0).latitude(), airports.get(0).longitude(), userPreferences.getSearchDate());
+
+		System.out.println("Print airplanes");
 		// try print out airplanes to check if we are doing everything right
 		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 //		Collections.sort(airplanes);
