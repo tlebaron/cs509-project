@@ -122,9 +122,9 @@ public class Airplane {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		
-		sb.append(manufacturer).append(", ");
-		sb.append(model).append(", ");
-		sb.append(Integer.toString(coachSeats.numberOfSeats)).append(", ");
+		sb.append(manufacturer).append("\t");
+		sb.append(model).append("\t");
+		sb.append(Integer.toString(coachSeats.numberOfSeats)).append("\t");
 		sb.append(Integer.toString(firstClassSeats.numberOfSeats));
 
 		return sb.toString();
