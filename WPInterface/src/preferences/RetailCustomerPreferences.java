@@ -3,6 +3,7 @@ package preferences;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -15,11 +16,11 @@ public class RetailCustomerPreferences {
 	SeatClass tripClass;
 	Airport departureAirport;
 	Airport arrivalAirport;
-	Date searchDate;
+	Calendar searchDate;
 	DateType searchDateType;
 	TripType tripType;
 	DateType searchReturnDateType;
-	Date returnDate;
+	Calendar returnDate;
 	// Do we have this here ?? Shouldn't be better to have a "default parameters" for the layover and
 	//the sorting? It doesn't make sense to store it here.
 	int maxLayover;
@@ -28,20 +29,28 @@ public class RetailCustomerPreferences {
 		
 	}
 	
-	public Date getSearchDate() {
+	public Calendar searchDate() {
 		return searchDate;
+	}
+	
+	public Airport departureAirport() {
+		return departureAirport;
+	}
+	
+	public Airport arrivalAirport() {
+		return arrivalAirport;
 	}
 	
 	public void printRetailCustomerPreferences() {
 		System.out.println("Trip Class: " + tripClass.toString());
 		System.out.println("Departure Airport: " + departureAirport.toString());
 		System.out.println("Arrival Airport: " + arrivalAirport.toString());
-		System.out.println("Search Date: " + searchDate.toString());
+		System.out.println("Search Date: " + searchDate.getTime().toString());
 		System.out.println("Search Date Type: " + searchDateType.toString());
 		System.out.println("Trip Type: " + tripType.toString());
 		if (tripType == TripType.ROUNDTRIP) {
 			System.out.println("Return date type: " + searchReturnDateType.toString() );
-			System.out.println("Return date: " + returnDate.toString() );
+			System.out.println("Return date: " + returnDate.getTime().toString() );
 		}
 	}
 	
@@ -120,7 +129,7 @@ public class RetailCustomerPreferences {
 		}
 	}
 
-	private Date getDate(Scanner sc) throws IOException {
+	private Calendar getDate(Scanner sc) throws IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Please input the date in the following format: MM-dd-yyyy");
 		String dateString = sc.next();
@@ -128,9 +137,9 @@ public class RetailCustomerPreferences {
 		while(true) {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
 			dateFormat.setLenient(false);
-			Date searchDate = null;
+			Calendar searchDate = Calendar.getInstance();
 			try {
-				searchDate = dateFormat.parse(dateString);
+				searchDate.setTime(dateFormat.parse(dateString));
 			} catch (ParseException e) {
 				System.out.println("The date you entered was invalid, please enter again.");
 				System.out.println("Please input the date in the following format: MM-dd-yyyy");

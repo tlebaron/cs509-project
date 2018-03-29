@@ -29,6 +29,8 @@ public class QueryFactory {
 				+ "&airport="+airportCode+""
 				+ "&day="+departureDate.get(1)+"_"+month+"_"+departureDate.get(5);
 		
+		System.out.println(url);
+		
 		return url;
 	}
 	

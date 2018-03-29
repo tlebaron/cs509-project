@@ -218,7 +218,7 @@ public class DaoFlights {
 		Element elementSC;
 		elementSC = (Element)elementSeat.getElementsByTagName("Coach").item(0);
 		//price
-		xmlSeat = elementSFC.getAttributeNode("Price").getValue();
+		xmlSeat = elementSC.getAttributeNode("Price").getValue();
 		xmlSeat = xmlSeat.substring(1);
 		coachSeat.price = Double.parseDouble(xmlSeat);
 		//number

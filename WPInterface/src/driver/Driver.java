@@ -15,6 +15,7 @@ import dao.ServerInterface;
 import flight.Flight;
 import flight.Flights;
 import preferences.RetailCustomerPreferences;
+import search.SearchTrip;
 import timeconversion.GMTConversionInterface;
 
 /**
@@ -40,25 +41,27 @@ public class Driver {
 	 */
 	public static void main(String[] args) {
 		initializeSystem();
-		printBOSFlights();
+		//printBOSFlights();
+		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences);
+		searchTrip.doSearch(teamName);
 	}
 	
 	private static void printBOSFlights() {
 		System.out.println("\nprint flights leaving BOS on 2018 May 12");
 		Calendar departureDate = Calendar.getInstance();
 		departureDate.set(2018,5,12);
-		System.out.println("date : "+departureDate.get(1)+"_"+departureDate.get(2)+"_"+departureDate.get(5));
+		System.out.println("Date : "+departureDate.get(1)+"_"+departureDate.get(2)+"_"+departureDate.get(5));
 		Flights flights = ServerInterface.INSTANCE.getFlights("BOS", departureDate, teamName);
 		for (Flight flight : flights){
-			System.out.println(flight.toString());
+			System.out.println(flight.toString()); 
 		}
-		
 	}
+	
 	private static void initializeSystem() {
 		initializeAirports();
 		retailCustomerPreferences.getRetailCustomerPreferences(airports);
 		retailCustomerPreferences.printRetailCustomerPreferences();
-		initializeTimeOffsets();
+		//initializeTimeOffsets();
 		initializeAirplanes();
 	}
 	
@@ -76,7 +79,7 @@ public class Driver {
 		GMTConversionInterface gmtInterface;
 		for(Airport a : airports) {
 			gmtInterface = new GMTConversionInterface();
-			Float offset = gmtInterface.getOffset(a.latitude(), a.longitude(), retailCustomerPreferences.getSearchDate());
+			Float offset = gmtInterface.getOffset(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
 			a.gmtOffset(offset);
 		}
 	}

@@ -31,7 +31,7 @@ public class GMTConversionInterface {
 	StringBuffer result = new StringBuffer();
 	String GMTConversion;
 	
-	public Float getOffset(Double airportLatitude, Double airportLongitude, Date departureDate) {
+	public Float getOffset(Double airportLatitude, Double airportLongitude, Calendar departureDate) {
 		request(airportLatitude, airportLongitude, departureDate);
 		Document docTimeDiff = buildDomDoc (GMTConversion);
 		NodeList nodes = docTimeDiff.getElementsByTagName("TimeZoneResponse");
@@ -89,8 +89,8 @@ public class GMTConversionInterface {
 		}
 	}
 	
-	private String request(Double airportLatitude, Double airportLongitude, Date departureDate) {
-		Long time = (Long) departureDate.getTime() / 1000;
+	private String request(Double airportLatitude, Double airportLongitude, Calendar departureDate) {
+		Long time = (Long) departureDate.getTime().getTime() / 1000;
 		String url = urlBase + "location=" + airportLatitude.toString() + "," + airportLongitude.toString() + "&timestamp=" + time.toString() + "&key=" + APIKey;
 		try {
 			URL requestURL = new URL(url);
