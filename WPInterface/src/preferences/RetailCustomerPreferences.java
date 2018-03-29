@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import airport.Airport;
 import airport.Airports;
+import trip.TripType;
 
 public class RetailCustomerPreferences {
 	
