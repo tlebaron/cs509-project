@@ -79,32 +79,42 @@ public class RetailCustomerPreferences {
 
 	private SeatClass getTripClass(Scanner sc) throws IOException {
 		System.out.println("What is the Trip Class? (1 - Economy, 2 - First Class)");
-		int tripClass = sc.nextInt();
 		while(true) {
-			switch (tripClass) {
-			case 1: return SeatClass.ECONOMY;
-			case 2: return SeatClass.FIRSTCLASS;
-			default: {
+			try {
+				int tripClass = Integer.parseInt(sc.next());
+				switch (tripClass) {
+				case 1: return SeatClass.ECONOMY;
+				case 2: return SeatClass.FIRSTCLASS;
+				default: {
+					System.out.println("The Trip Class you entered does not match the two available classes.");
+					System.out.println("What is the Trip Class? (1 - Economy, 2 - First Class)");
+					}
+				}
+			} catch (Exception e) {
 				System.out.println("The Trip Class you entered does not match the two available classes.");
 				System.out.println("What is the Trip Class? (1 - Economy, 2 - First Class)");
-				tripClass = sc.nextInt();
-				}
+				continue;
 			}
 		}
 	}
 
 	private DateType getDateType(Scanner sc)  {
 		System.out.println("What is the Date Type? (1 - Departure date, 2 - Arrival date)");
-		int dateType = sc.nextInt();
 		while(true) {
-			switch (dateType) {
-			case 1: return DateType.DEPARTURE;
-			case 2: return DateType.ARRIVAL;
-			default: {
-				System.out.println("The Date Type you entered does not match the two available types, try again.");
-				System.out.println("What is the Date Type? (1 - Departure date, 2 - Arrival date)");
-				dateType = sc.nextInt();
+			try {
+				int dateType =  Integer.parseInt(sc.next());
+				switch (dateType) {
+				case 1: return DateType.DEPARTURE;
+				case 2: return DateType.ARRIVAL;
+				default: {
+					System.out.println("The Date Type you entered does not match the two available types, try again.");
+					System.out.println("What is the Date Type? (1 - Departure date, 2 - Arrival date)");
+					}
 				}
+			} catch (Exception e) {
+				System.out.println("The Date Type you entered does not match the two available date types.");
+				System.out.println("What is the Trip Class? (1 - Departure date, 2 - Arrival date)");
+				continue;
 			}
 		}
 	}
@@ -114,14 +124,20 @@ public class RetailCustomerPreferences {
 		System.out.println("Please input the date in the following format: MM-dd-yyyy");
 		String dateString = sc.next();
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-		Date searchDate = null;
-		try {
-			searchDate = dateFormat.parse(dateString);
-		} catch (ParseException e) {
-			e.printStackTrace();
+		while(true) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+			dateFormat.setLenient(false);
+			Date searchDate = null;
+			try {
+				searchDate = dateFormat.parse(dateString);
+			} catch (ParseException e) {
+				System.out.println("The date you entered was invalid, please enter again.");
+				System.out.println("Please input the date in the following format: MM-dd-yyyy");
+				dateString = sc.next();
+				continue;
+			}
+			return searchDate;
 		}
-		return searchDate;
 	}
 
 	private Airport getAirport(Scanner sc, Airports airports, String type) {
@@ -142,16 +158,21 @@ public class RetailCustomerPreferences {
 
 	private TripType getTripType(Scanner sc) {
 		System.out.println("What is yor trip type? (1 - OneWay, 2 - RoundTrip)");
-		int tripType = sc.nextInt();
 		while(true) {
-			switch (tripType) {
-			case 1: return TripType.ONEWAY;
-			case 2: return TripType.ROUNDTRIP;
-			default: {
+			try {
+				int tripType =  Integer.parseInt(sc.next());
+				switch (tripType) {
+				case 1: return TripType.ONEWAY;
+				case 2: return TripType.ROUNDTRIP;
+				default: {
+					System.out.println("The Trip Type you entered does not match the two available types, try again.");
+					System.out.println("What is your trip type? (1 - OneWay, 2 - RoundTrip)");
+					}
+				}
+			} catch (Exception e) {
 				System.out.println("The Trip Type you entered does not match the two available types, try again.");
 				System.out.println("What is your trip type? (1 - OneWay, 2 - RoundTrip)");
-				tripType = sc.nextInt();
-				}
+				continue;
 			}
 		}
 	}
