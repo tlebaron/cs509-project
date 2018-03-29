@@ -29,6 +29,7 @@ public class Airport implements Comparable<Airport>, Comparator<Airport> {
 	private String mCode;              // Three character code of the airport
 	private double mLatitude;          // Latitude of airport in decimal format
 	private double mLongitude;         // Longitude of the airport in decimal format
+	private double gmtOffset;		// offset used to calculate the local time at an airport
 	
 	/**
 	 * Default constructor
@@ -144,6 +145,21 @@ public class Airport implements Comparable<Airport>, Comparator<Airport> {
 	 */
 	public String name () {
 		return mName;
+	}
+	
+	
+	/**
+	 * Set the airport GMT offset
+	 */
+	public void gmtOffset (Float offset) {
+		this.gmtOffset = (double) offset;
+	}
+	
+	/**
+	 * Set the airport GMT offset
+	 */
+	public double gmtOffset () {
+		return this.gmtOffset;
 	}
 	
 	/**

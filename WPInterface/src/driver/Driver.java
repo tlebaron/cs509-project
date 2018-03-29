@@ -54,13 +54,12 @@ public class Driver {
 		System.out.println("Print User Preferences");
 		userPreferences.printRetailCustomerPreferences();
 		
-		/**
+		
 		for(Airport a : airports) {
-			gmtInterface.getOffset(a.latitude(), a.longitude(), userPreferences.getSearchDate());
+			Float offset = gmtInterface.getOffset(a.latitude(), a.longitude(), userPreferences.getSearchDate());
+			a.gmtOffset(offset);
 		}
-		**/
-		System.out.println(gmtInterface.getOffset(airports.get(0).latitude(), airports.get(0).longitude(), userPreferences.getSearchDate()));
-
+		
 		System.out.println("Print airplanes");
 		// try print out airplanes to check if we are doing everything right
 		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
