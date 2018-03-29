@@ -76,8 +76,8 @@ public class Flight {
 		sb.append("Departure: "+departureAirport.code() + "\n");
 		sb.append("Arrival: "+arrivalAirport.code() + "\n");
 		sb.append("Duration: "+Integer.toString(flightTime)+" minutes\n");
-		sb.append("Number of first class seats booked: "+Integer.toString(firstClassSeating.numberOfSeats)+ " at " + Double.toString(firstClassSeating.price)  + "\n");
-		sb.append("Number of economy seats booked: "+Integer.toString(coachSeating.numberOfSeats)+ " at " + Double.toString(coachSeating.price)  + "\n");
+		sb.append("Number of first class seats booked: "+Integer.toString(firstClassSeating.numberOfSeats)+ " at $" + Double.toString(firstClassSeating.price)  + "\n");
+		sb.append("Number of economy seats booked: "+Integer.toString(coachSeating.numberOfSeats)+ " at $" + Double.toString(coachSeating.price)  + "\n");
 		sb.append("Departure Time (GMT): "+departureTimeGMT.get(2)+"/"+departureTimeGMT.get(5)+"/"+departureTimeGMT.get(1)+" at "+departureHour+":"+departureMinute + "\n");
 		sb.append("Arrival Time (GMT): "+arrivalTimeGMT.get(2)+"/"+arrivalTimeGMT.get(5)+"/"+arrivalTimeGMT.get(1)+" at "+arrivalHour+":" + arrivalMinute + "\n");
 		sb.append("----------");
