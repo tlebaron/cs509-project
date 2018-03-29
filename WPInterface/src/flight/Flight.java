@@ -72,12 +72,15 @@ public class Flight {
 		
 		//sb.append(manufacturer).append(", ");
 		//sb.append(Integer.toString(coachSeats.numberOfSeats)).append(", ");
-		sb.append("Flight "+Integer.toString(flightNumber)+" between "+departureAirport.code()+" and "+arrivalAirport.code());
-		sb.append(" has a time of "+Integer.toString(flightTime)+" minutes. ");
-		sb.append("It has "+Integer.toString(coachSeating.numberOfSeats)+" coach seats and "+Integer.toString(firstClassSeating.numberOfSeats)+" first class seats. ");
-		sb.append("The depart is "+departureTimeGMT.get(2)+"/"+departureTimeGMT.get(5)+"/"+departureTimeGMT.get(1)+" at "+departureHour+":"+departureMinute);
-		sb.append(" and the arrival is "+arrivalTimeGMT.get(2)+"/"+arrivalTimeGMT.get(5)+"/"+arrivalTimeGMT.get(1)+" at "+arrivalHour+":");
-		sb.append(arrivalMinute+", time in GMT");
+		sb.append("Flight number: "+Integer.toString(flightNumber) + "\n");
+		sb.append("Departure: "+departureAirport.code() + "\n");
+		sb.append("Arrival: "+arrivalAirport.code() + "\n");
+		sb.append("Duration: "+Integer.toString(flightTime)+" minutes\n");
+		sb.append("Number of first class seats booked: "+Integer.toString(firstClassSeating.numberOfSeats)+ " at " + Double.toString(firstClassSeating.price)  + "\n");
+		sb.append("Number of economy seats booked: "+Integer.toString(coachSeating.numberOfSeats)+ " at " + Double.toString(coachSeating.price)  + "\n");
+		sb.append("Departure Time (GMT): "+departureTimeGMT.get(2)+"/"+departureTimeGMT.get(5)+"/"+departureTimeGMT.get(1)+" at "+departureHour+":"+departureMinute + "\n");
+		sb.append("Arrival Time (GMT): "+arrivalTimeGMT.get(2)+"/"+arrivalTimeGMT.get(5)+"/"+arrivalTimeGMT.get(1)+" at "+arrivalHour+":" + arrivalMinute + "\n");
+		sb.append("----------");
 
 		return sb.toString();
 	}

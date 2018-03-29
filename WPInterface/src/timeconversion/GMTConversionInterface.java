@@ -92,7 +92,6 @@ public class GMTConversionInterface {
 	private String request(Double airportLatitude, Double airportLongitude, Date departureDate) {
 		Long time = (Long) departureDate.getTime() / 1000;
 		String url = urlBase + "location=" + airportLatitude.toString() + "," + airportLongitude.toString() + "&timestamp=" + time.toString() + "&key=" + APIKey;
-		System.out.println(url);
 		try {
 			URL requestURL = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) requestURL.openConnection();
@@ -112,7 +111,6 @@ public class GMTConversionInterface {
 			e.printStackTrace();
 		}
 		GMTConversion = result.toString();
-		System.out.println(GMTConversion);
 		return GMTConversion;
 	}
 }

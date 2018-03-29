@@ -23,8 +23,12 @@ import timeconversion.GMTConversionInterface;
  */
 public class Driver {
 
-	static RetailCustomerPreferences userPreferences;
-	static GMTConversionInterface gmtInterface;
+	private static final String teamName = "Team1";
+	
+	static RetailCustomerPreferences retailCustomerPreferences = new RetailCustomerPreferences();
+	static Airports airports;
+	static Airplanes airplanes;
+	
 	/**
 	 * Entry point for CS509 sample code driver
 	 * 
@@ -35,39 +39,11 @@ public class Driver {
 	 * @param args is the arguments passed to java vm in format of "CS509.sample teamName" where teamName is a valid team
 	 */
 	public static void main(String[] args) {
-		
-		userPreferences = new RetailCustomerPreferences();
-		gmtInterface = new GMTConversionInterface();
-		
-		//String teamName = args[0];
-		String teamName = "Team1";
-		// Try to get a list of airports
-		Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
-		Collections.sort(airports);
-		
-		for (Airport airport : airports) {
-			System.out.println(airport.toString());
-		}
-		
-		userPreferences.getRetailCustomerPreferences(airports);
-		
-		System.out.println("Print User Preferences");
-		userPreferences.printRetailCustomerPreferences();
-		
-		
-		for(Airport a : airports) {
-			Float offset = gmtInterface.getOffset(a.latitude(), a.longitude(), userPreferences.getSearchDate());
-			a.gmtOffset(offset);
-		}
-		
-		System.out.println("Print airplanes");
-		// try print out airplanes to check if we are doing everything right
-		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
-//		Collections.sort(airplanes);
-		for (Airplane airplane : airplanes) {
-			System.out.println(airplane.toString());
-		}
-		
+		initializeSystem();
+		printBOSFlights();
+	}
+	
+	private static void printBOSFlights() {
 		System.out.println("\nprint flights leaving BOS on 2018 May 12");
 		Calendar departureDate = Calendar.getInstance();
 		departureDate.set(2018,5,12);
@@ -75,6 +51,42 @@ public class Driver {
 		Flights flights = ServerInterface.INSTANCE.getFlights("BOS", departureDate, teamName);
 		for (Flight flight : flights){
 			System.out.println(flight.toString());
+		}
+		
+	}
+	private static void initializeSystem() {
+		initializeAirports();
+		retailCustomerPreferences.getRetailCustomerPreferences(airports);
+		retailCustomerPreferences.printRetailCustomerPreferences();
+		initializeTimeOffsets();
+		initializeAirplanes();
+	}
+	
+	private static void initializeAirports() {
+		// Try to get a list of airports
+		airports = ServerInterface.INSTANCE.getAirports(teamName);
+		Collections.sort(airports);
+		
+		for (Airport airport : airports) {
+			System.out.println(airport.toString());
+		}
+	}
+	
+	private static void initializeTimeOffsets() {
+		GMTConversionInterface gmtInterface;
+		for(Airport a : airports) {
+			gmtInterface = new GMTConversionInterface();
+			Float offset = gmtInterface.getOffset(a.latitude(), a.longitude(), retailCustomerPreferences.getSearchDate());
+			a.gmtOffset(offset);
+		}
+	}
+	
+	private static void initializeAirplanes() {
+		System.out.println("Print airplanes");
+		// try print out airplanes to check if we are doing everything right
+		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
+		for (Airplane airplane : airplanes) {
+			System.out.println(airplane.toString());
 		}
 	}
 }
