@@ -85,7 +85,8 @@ public class Driver {
 	}
 	
 	private static void initializeAirplanes() {
-		System.out.println("Print airplanes");
+		System.out.println("\nPrint airplanes");
+		System.out.println("Manu\tModel\t#coach\t#1stclass");
 		// try print out airplanes to check if we are doing everything right
 		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 		for (Airplane airplane : airplanes) {
