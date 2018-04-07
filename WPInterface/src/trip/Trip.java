@@ -1,12 +1,17 @@
 package trip;
 
 import flight.Flight;
+import static java.lang.Math.toIntExact;
 import flight.Flights;
 
 public class Trip {
 	TripType type;
 	Trip followingTrip;
-	Flights flights;
+	public Flights flights;
+	
+	public Trip(){
+		flights = new Flights();
+	}
 	
 	public void addFlight(Flight flight){
 		flights.add(flight);
@@ -25,5 +30,10 @@ public class Trip {
 		}
 		
 		return sb.toString();
+	}
+	
+	public int getDuration(){
+		return toIntExact((flights.get(flights.size()-1).arrivalTimeGMT.getTime().getTime() - 
+				flights.get(0).departureTimeGMT.getTime().getTime())  / (1000 * 60));
 	}
 }

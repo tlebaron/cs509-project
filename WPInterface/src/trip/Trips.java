@@ -13,5 +13,16 @@ import java.util.ArrayList;
 public class Trips extends ArrayList<Trip> {
 	private static final long serialVersionUID = 1L;
 	
+	public String toString(){
+		String string = "List of trips:\n";
+		
+		for (Trip trip : this){
+			string += trip.flights.get(0).departureAirport.code() + " | ";
+			string += trip.flights.get(trip.flights.size()-1).arrivalAirport.code() + " | ";
+			string += trip.getDuration() + "mins\n";
+		}
+		
+		return string;
+	}
 	
 }
