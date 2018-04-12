@@ -1,10 +1,7 @@
 package flight;
 import java.util.Calendar;
-import java.util.Date;
-
 import airplane.Airplane;
 import airport.Airport;
-import preferences.RetailCustomerPreferences;
 import seat.SeatClass;
 import seat.Seats;
 

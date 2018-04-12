@@ -2,6 +2,9 @@ package trip;
 
 import flight.Flight;
 import static java.lang.Math.toIntExact;
+
+import java.util.Date;
+
 import flight.Flights;
 import preferences.RetailCustomerPreferences;
 import seat.SeatClass;
@@ -35,8 +38,7 @@ public class Trip {
 	}
 	
 	public int getDuration(){
-		return toIntExact((flights.get(flights.size()-1).arrivalTimeGMT.getTime().getTime() - 
-				flights.get(0).departureTimeGMT.getTime().getTime())  / (1000 * 60));
+		return toIntExact((getArrivalTime() - getDepartureTime())  / (1000 * 60));
 	}
 	
 	public double getPrice(SeatClass seatClass){
@@ -45,5 +47,13 @@ public class Trip {
 			price += flight.getPrice(seatClass);
 		}
 		return price;
+	}
+	
+	public long getDepartureTime(){
+		return flights.get(0).departureTimeGMT.getTime().getTime();
+	}
+	
+	public long getArrivalTime(){
+		return flights.get(flights.size()-1).arrivalTimeGMT.getTime().getTime();
 	}
 }
