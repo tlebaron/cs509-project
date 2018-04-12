@@ -26,7 +26,7 @@ public class Driver {
 
 	private static final String teamName = "Team1";
 	
-	static RetailCustomerPreferences retailCustomerPreferences = new RetailCustomerPreferences();
+	static RetailCustomerPreferences retailCustomerPreferences = RetailCustomerPreferences.getInstance();
 	static Airports airports;
 	static Airplanes airplanes;
 	

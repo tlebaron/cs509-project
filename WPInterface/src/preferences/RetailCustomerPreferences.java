@@ -9,11 +9,14 @@ import java.util.Scanner;
 
 import airport.Airport;
 import airport.Airports;
+import seat.SeatClass;
 import trip.TripType;
 
 public class RetailCustomerPreferences {
 	
-	SeatClass tripClass;
+	private static RetailCustomerPreferences instance = null;
+	
+	public SeatClass tripClass;
 	Airport departureAirport;
 	Airport arrivalAirport;
 	Calendar searchDate;
@@ -25,8 +28,15 @@ public class RetailCustomerPreferences {
 	//the sorting? It doesn't make sense to store it here.
 	int maxLayover;
 	
-	public RetailCustomerPreferences() {
+	protected RetailCustomerPreferences() {
 		
+	}
+	
+	public static RetailCustomerPreferences getInstance(){
+		if(instance == null){
+			instance = new RetailCustomerPreferences();
+		}
+		return instance;
 	}
 	
 	public Calendar searchDate() {
@@ -93,7 +103,7 @@ public class RetailCustomerPreferences {
 			try {
 				int tripClass = Integer.parseInt(sc.next());
 				switch (tripClass) {
-				case 1: return SeatClass.ECONOMY;
+				case 1: return SeatClass.COACH;
 				case 2: return SeatClass.FIRSTCLASS;
 				default: {
 					System.out.println("The Trip Class you entered does not match the two available classes.");

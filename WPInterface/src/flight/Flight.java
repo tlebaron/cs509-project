@@ -4,6 +4,7 @@ import java.util.Date;
 
 import airplane.Airplane;
 import airport.Airport;
+import preferences.RetailCustomerPreferences;
 import seat.SeatClass;
 import seat.Seats;
 
@@ -83,6 +84,18 @@ public class Flight {
 		sb.append("----------");
 
 		return sb.toString();
+	}
+
+	public double getPrice(SeatClass seatClass) {
+		switch(seatClass) {
+			case COACH:
+				return coachSeating.price;
+			case FIRSTCLASS:
+				return firstClassSeating.price;
+			default:
+				return -1;
+				
+		}
 	}
 	
 }
