@@ -3,6 +3,7 @@
  */
 package driver;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,7 @@ import flight.Flights;
 import preferences.RetailCustomerPreferences;
 import search.SearchTrip;
 import timeconversion.GMTConversionInterface;
+import reservation.reserve;
 
 /**
  * @author blake
@@ -44,6 +46,7 @@ public class Driver {
 		//printBOSFlights();
 		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences);
 		searchTrip.doSearch(teamName);
+		reserveSeat();
 	}
 	
 	private static void printBOSFlights() {
@@ -91,6 +94,25 @@ public class Driver {
 		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 		for (Airplane airplane : airplanes) {
 			System.out.println(airplane.toString());
+		}
+	}
+	
+	private static void reserveSeat() {
+		System.out.println("\nReserve seats and return result(s)");
+//		ServerInterface.INSTANCE.reserve_ticket(teamName, xmlFlights);
+		Flight myFlight = new Flight();
+		myFlight.flightNumber = 3809;
+		Flights myFlights = new Flights();
+		myFlights.add(myFlight);
+		String seattype = new String("Coach");// FirstClass
+		
+		reserve nowreserve = new reserve(myFlights);
+		boolean status = nowreserve.reserveFlights(seattype, teamName);
+		if (status) {
+			System.out.println("Reservation succeed!");
+		}
+		else {
+			System.out.println("Something went wrong, unable to book the seat, plz try again later.");
 		}
 	}
 }

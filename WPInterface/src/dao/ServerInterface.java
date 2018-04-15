@@ -249,6 +249,60 @@ public enum ServerInterface {
 	}
 
 	/**
+	 * reserve ticket by HTTP POST protocol, send flight number and seat type to the server
+	 * 
+	 * @param teamName is the name of the team holding the lock
+	 * @return true if the seat(s) are successfully booked.
+	 */
+	public boolean reserve_ticket (String teamName, String xmlFlights) {
+		URL url;
+		HttpURLConnection connection;
+		
+		try {
+			url = new URL(mUrlBase);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			
+			String params = QueryFactory.reserve(teamName, xmlFlights);
+			
+			connection.setDoOutput(true);
+			connection.setDoInput(true);
+			
+			DataOutputStream writer = new DataOutputStream(connection.getOutputStream());
+			writer.writeBytes(params);
+			writer.flush();
+			writer.close();
+		    
+			int responseCode = connection.getResponseCode();
+			System.out.println("\nSending 'POST' to reserve seat(s)");
+			System.out.println(("\nResponse Code : " + responseCode));
+
+			if (responseCode >= HttpURLConnection.HTTP_OK) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				String line;
+				StringBuffer response = new StringBuffer();
+
+				while ((line = in.readLine()) != null) {
+					response.append(line);
+				}
+				in.close();
+
+				System.out.println(response.toString());
+			}
+		}
+		catch (IOException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	
+	/**
 	 * Unlock the database previous locked by specified team. The operation will succeed if the server lock is held by the specified
 	 * team or if the server is not currently locked. If the lock is held be another team, the operation will fail.
 	 * 

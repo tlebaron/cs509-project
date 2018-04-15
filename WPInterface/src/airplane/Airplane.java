@@ -1,8 +1,8 @@
 package airplane;
 import seat.SeatClass;
 import seat.Seats;
-import java.util.Comparator;
-import utils.Saps;
+//import java.util.Comparator;
+//import utils.Saps;
 
 /**
  * This class holds values pertaining to a single Airplane. Class member attributes

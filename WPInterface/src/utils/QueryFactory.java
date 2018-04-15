@@ -65,6 +65,16 @@ public class QueryFactory {
 	}
 	
 	/**
+	 * update info to reserve seat(s)
+	 * 
+	 * @param teamName is the name of the team holding the lock, xmlFlights is the sending message
+	 * @return the String written to the HTTP POST to reserve seat(s)
+	 */
+	public static String reserve (String teamName, String xmlFlights) {
+		return "team=" + teamName + "&action=buyTickets" + "&&flightData=" + xmlFlights;
+	}
+	
+	/**
 	 * Unlock the server database after updates are written
 	 * 
 	 * @param teamName is the name of the team holding the lock
