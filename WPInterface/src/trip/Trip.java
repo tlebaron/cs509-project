@@ -22,13 +22,13 @@ public class Trip {
 		flights.add(flight);
 	}
 	
-	public void getFlight(int index){
-		flights.get(index);
+	public Flight getFlight(int index){
+		return flights.get(index);
 	}
 	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
-		sb.append("List of flights of this trip:");
+		sb.append("List of flights of this trip:\n");
 		
 		for(Flight flight : flights){
 			sb.append(flight.toString());

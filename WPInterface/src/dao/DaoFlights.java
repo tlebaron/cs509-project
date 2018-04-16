@@ -5,7 +5,10 @@ package dao;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -88,40 +91,40 @@ public class DaoFlights {
 		int monthNum = 0;
 		switch(stringPart[1]){
 		case "Jan":
+			monthNum = 0;
+			break;
+		case "Feb":
 			monthNum = 1;
 			break;
-		case "Fev":
+		case "Mar":
 			monthNum = 2;
 			break;
-		case "Mar":
+		case "Apr":
 			monthNum = 3;
 			break;
-		case "Apr":
+		case "May":
 			monthNum = 4;
 			break;
-		case "May":
+		case "Jun":
 			monthNum = 5;
 			break;
-		case "Jun":
+		case "Jul":
 			monthNum = 6;
 			break;
-		case "Jul":
+		case "Aug":
 			monthNum = 7;
 			break;
-		case "Aug":
+		case "Sep":
 			monthNum = 8;
 			break;
-		case "Sep":
+		case "Oct":
 			monthNum = 9;
 			break;
-		case "Oct":
+		case "Nov":
 			monthNum = 10;
 			break;
-		case "Nov":
-			monthNum = 11;
-			break;
 		case "Dec":
-			monthNum = 12;
+			monthNum = 11;
 			break;
 		}
 		
@@ -184,6 +187,7 @@ public class DaoFlights {
 		Element elementDTime;
 		elementDTime = (Element)elementDeparture.getElementsByTagName("Time").item(0);
 		xmlTime = getCharacterDataFromElement(elementDTime);
+		//System.out.println(xmlTime);
 		departureTime = timeStringToCal(xmlTime);
 		
 		//Arrival child element
@@ -210,7 +214,15 @@ public class DaoFlights {
 		//ex : flightTime = Integer.parseInt(elementFlight.getAttributeNode("FlightTime").getValue());
 		xmlSeat = elementSFC.getAttributeNode("Price").getValue();
 		xmlSeat = xmlSeat.substring(1);
-		firstClassSeat.price = Double.parseDouble(xmlSeat);
+		NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+		Number n = null;
+		try {
+			n = format.parse(xmlSeat);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		firstClassSeat.price = n.doubleValue();
 		//number
 		firstClassSeat.numberOfSeats = Integer.parseInt(getCharacterDataFromElement(elementSFC));
 		
