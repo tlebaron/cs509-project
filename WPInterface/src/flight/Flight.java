@@ -83,6 +83,14 @@ public class Flight {
 		return sb.toString();
 	}
 
+	public Airport getArrivalAirport() {
+		return this.arrivalAirport;
+	}
+	
+	public Airport getDepartureAirport() {
+		return this.departureAirport;
+	}
+	
 	public double getPrice(SeatClass seatClass) {
 		switch(seatClass) {
 			case COACH:
@@ -93,6 +101,16 @@ public class Flight {
 				return -1;
 				
 		}
+	}
+
+	public Calendar getArrivalTimeGMT() {
+		// TODO Auto-generated method stub
+		return this.arrivalTimeGMT;
+	}
+	
+	public Calendar getDepartureTimeGMT() {
+		// TODO Auto-generated method stub
+		return this.departureTimeGMT;
 	}
 	
 }

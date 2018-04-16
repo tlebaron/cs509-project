@@ -22,14 +22,12 @@ public class QueryFactory {
 	 * @return the query String which can be appended to URL to form HTTP GET request
 	 */
 	public static String getFlightsFromDeparture(String airportCode, Calendar departureDate, String teamName) {
-		String month = Integer.toString(departureDate.get(Calendar.MONTH) + 1);
+		String month = Integer.toString(departureDate.get(Calendar.MONTH)+ 1);
 		if(month.length()<2) month = "0"+month;
 		String url = "?team=" + teamName + "&action=list"
 				+ "&list_type=departing"
 				+ "&airport="+airportCode+""
 				+ "&day="+departureDate.get(1)+"_"+month+"_"+departureDate.get(5);
-		
-		System.out.println(url);
 		
 		return url;
 	}

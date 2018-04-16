@@ -18,6 +18,8 @@ import flight.Flights;
 import preferences.RetailCustomerPreferences;
 import search.SearchTrip;
 import timeconversion.GMTConversionInterface;
+import trip.Trip;
+import trip.Trips;
 import reservation.reserve;
 
 /**
@@ -45,8 +47,12 @@ public class Driver {
 		initializeSystem();
 		//printBOSFlights();
 		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences);
-		searchTrip.doSearch(teamName);
-		reserveSeat();
+		Trips trips = searchTrip.search(teamName);
+		System.out.println("Size of trips: " + trips.size());
+		for (Trip t : trips) {
+			System.out.println(t.toString());
+		}
+		//reserveSeat();
 	}
 	
 	private static void printBOSFlights() {

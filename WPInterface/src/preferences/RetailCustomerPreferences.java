@@ -43,6 +43,14 @@ public class RetailCustomerPreferences {
 		return searchDate;
 	}
 	
+	public DateType searchDateType() {
+		return searchDateType;
+	}
+	
+	public TripType searchTripType() {
+		return tripType;
+	}
+	
 	public Airport departureAirport() {
 		return departureAirport;
 	}
