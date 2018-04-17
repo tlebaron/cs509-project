@@ -1,6 +1,13 @@
 package trip;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+import preferences.RetailCustomerPreferences;
+
 
 /**
  * This class aggregates a number of Trips. The aggregate is implemented as an ArrayList.
@@ -25,4 +32,48 @@ public class Trips extends ArrayList<Trip> {
 		return string;
 	}
 	
+	public HashMap<Integer, Trip> createList(int maxStopOver){
+		HashMap<Integer, Trip> hashList = new HashMap<Integer, Trip>();
+		
+		for (Trip trip : this){
+			if (trip.getFlights().size() > maxStopOver) continue;
+			hashList.put(this.indexOf(trip), trip);
+		}
+		
+		return hashList;
+	}
+	public HashMap<Integer, Trip> createList(){
+		return createList(2);
+	}
+	
+	public void displayTrips(){
+		int maxStepOver = 2;
+		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
+		
+		
+		System.out.println("Available trips:");
+		System.out.println("ID \t|\t Departure Airport \t|\t Arrival Airport \t|\t "
+				+ "Duration \t|\t Price \t|\t Dearture Time \t|\t Arrival Time  \t|\t "
+				+ "Seats");
+		
+		HashMap<Integer, Trip> hashList = createList(maxStepOver);
+		
+		// use iterator to run on the map
+		Set set = hashList.entrySet();
+		Iterator iterator = set.iterator();
+		while(iterator.hasNext()){
+			Map.Entry mEntry = (Map.Entry)iterator.next();
+			Trip trip = (Trip)mEntry.getValue();
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append(trip.getDepartureAirportCode() + " \t|\t ");
+			sb.append(trip.getArrivalAirportCode() + " \t|\t ");
+			sb.append(trip.getDuration() + " \t|\t ");
+			sb.append(trip.getPrice(preferences.getTripClass()) + " \t|\t ");
+			sb.append(trip.getDepartureTime() + " \t|\t ");
+			sb.append(trip.getArrivalTime() + " \t|\t ");
+			sb.append(trip.getAvailableSeats(preferences.getTripClass()) + " \t|\t ");
+		}
+		
+	}
 }

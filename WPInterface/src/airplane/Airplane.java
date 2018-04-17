@@ -40,12 +40,12 @@ public class Airplane {
 		model = "";
 		
 		coachSeats = new Seats();
-		coachSeats.numberOfSeats = 0;
+		coachSeats.setNumberOfSeats(0);
 		coachSeats.seatClass = SeatClass.COACH;
 		coachSeats.price = 0;
 		
 		firstClassSeats = new Seats();
-		firstClassSeats.numberOfSeats = 0;
+		firstClassSeats.setNumberOfSeats(0);
 		firstClassSeats.seatClass = SeatClass.FIRSTCLASS;
 		firstClassSeats.price = 0;
 	}
@@ -76,8 +76,8 @@ public class Airplane {
 		
 		manufacturer = manufacturer1;
 		model = model1;
-		coachSeats.numberOfSeats = num_coachSeats1;
-		firstClassSeats.numberOfSeats = num_firstClassSeats1;
+		coachSeats.setNumberOfSeats(num_coachSeats1);
+		firstClassSeats.setNumberOfSeats(num_firstClassSeats1);
 	}
 	
 	/**
@@ -110,8 +110,8 @@ public class Airplane {
 		
 		manufacturer = manufacturer1;
 		model = model1;
-		coachSeats.numberOfSeats = temp_num_coachSeats1;
-		firstClassSeats.numberOfSeats = temp_num_firstClassSeats1;
+		coachSeats.setNumberOfSeats(temp_num_coachSeats1);
+		firstClassSeats.setNumberOfSeats(temp_num_firstClassSeats1);
 	}
 
 	/**
@@ -124,8 +124,8 @@ public class Airplane {
 		
 		sb.append(manufacturer).append("\t");
 		sb.append(model).append("\t");
-		sb.append(Integer.toString(coachSeats.numberOfSeats)).append("\t");
-		sb.append(Integer.toString(firstClassSeats.numberOfSeats));
+		sb.append(Integer.toString(coachSeats.getNumberOfSeats())).append("\t");
+		sb.append(Integer.toString(firstClassSeats.getNumberOfSeats()));
 
 		return sb.toString();
 	}
@@ -182,14 +182,14 @@ public class Airplane {
 	 */
 	public void num_coachSeats (int num_coachSeats1) {
 		if (isValidNum_coachSeats(num_coachSeats1))
-			coachSeats.numberOfSeats = num_coachSeats1;
+			coachSeats.setNumberOfSeats(num_coachSeats1);
 		else
 			throw new IllegalArgumentException (Integer.toString(num_coachSeats1));
 	}
 	
 	public void num_coachSeats (String num_coachSeats1) {
 		if (isValidNum_coachSeats(num_coachSeats1))
-			coachSeats.numberOfSeats = Integer.parseInt(num_coachSeats1);
+			coachSeats.setNumberOfSeats(Integer.parseInt(num_coachSeats1));
 		else
 			throw new IllegalArgumentException (num_coachSeats1);
 	}
@@ -200,7 +200,7 @@ public class Airplane {
 	 * @return The number of coach seats 
 	 */
 	public double num_coachSeats () {
-		return coachSeats.numberOfSeats;
+		return coachSeats.getNumberOfSeats();
 	}
 	
 	/**
@@ -211,14 +211,14 @@ public class Airplane {
 	 */
 	public void num_firstClassSeats (int num_firstClassSeats1) {
 		if (isValidNum_firstClassSeats(num_firstClassSeats1))
-			firstClassSeats.numberOfSeats = num_firstClassSeats1;
+			firstClassSeats.setNumberOfSeats(num_firstClassSeats1);
 		else
 			throw new IllegalArgumentException (Integer.toString(num_firstClassSeats1));
 	}
 	
 	public void num_firstClassSeats (String num_firstClassSeats1) {
 		if (isValidNum_firstClassSeats(num_firstClassSeats1))
-			firstClassSeats.numberOfSeats = Integer.parseInt(num_firstClassSeats1);
+			firstClassSeats.setNumberOfSeats(Integer.parseInt(num_firstClassSeats1));
 		else
 			throw new IllegalArgumentException (num_firstClassSeats1);
 	}
@@ -229,7 +229,7 @@ public class Airplane {
 	 * @return the number of first class seats
 	 */
 	public double num_firstClassSeats () {
-		return firstClassSeats.numberOfSeats;
+		return firstClassSeats.getNumberOfSeats();
 	}
 
 	/**
@@ -248,7 +248,7 @@ public class Airplane {
 			return false;
 		
 		// Verify num_coachSeats and num_firstClassSeats are within range
-		if (coachSeats.numberOfSeats < 0 || firstClassSeats.numberOfSeats < 0) {
+		if (coachSeats.getNumberOfSeats() < 0 || firstClassSeats.getNumberOfSeats() < 0) {
 			return false;
 		}
 		

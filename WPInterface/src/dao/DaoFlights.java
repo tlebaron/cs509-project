@@ -224,7 +224,7 @@ public class DaoFlights {
 		}
 		firstClassSeat.price = n.doubleValue();
 		//number
-		firstClassSeat.numberOfSeats = Integer.parseInt(getCharacterDataFromElement(elementSFC));
+		firstClassSeat.setNumberOfSeats(Integer.parseInt(getCharacterDataFromElement(elementSFC)));
 		
 		//First class
 		Element elementSC;
@@ -234,7 +234,7 @@ public class DaoFlights {
 		xmlSeat = xmlSeat.substring(1);
 		coachSeat.price = Double.parseDouble(xmlSeat);
 		//number
-		coachSeat.numberOfSeats = Integer.parseInt(getCharacterDataFromElement(elementSC));
+		coachSeat.setNumberOfSeats(Integer.parseInt(getCharacterDataFromElement(elementSC)));
 		
 		
 		
