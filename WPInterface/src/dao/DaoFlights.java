@@ -242,15 +242,15 @@ public class DaoFlights {
 		/**
 		 * Update the Flight object with values from XML node
 		 */
-		Flight.airplane = airplane;
-		Flight.flightTime = flightTime;
-		Flight.flightNumber = flightNumber;
-		Flight.departureAirport = departureAirport;
-		Flight.arrivalAirport = arrivalAirport;
-		Flight.departureTimeGMT = departureTime;
-		Flight.arrivalTimeGMT = arrivalTime;
-		Flight.firstClassSeating = firstClassSeat;
-		Flight.coachSeating = coachSeat;
+		Flight.setAirplane(airplane);
+		Flight.setFlightTime(flightTime);
+		Flight.setFlightNumber(flightNumber);
+		Flight.setDepartureAirport(departureAirport);
+		Flight.setArrivalAirport(arrivalAirport);
+		Flight.setDepartureTimeGMT(departureTime);
+		Flight.setArrivalTimeGMT(arrivalTime);
+		Flight.setFirstClassSeating(firstClassSeat);
+		Flight.setCoachSeating(coachSeat);
 		
 		return Flight;
 	}

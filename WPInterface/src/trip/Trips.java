@@ -17,8 +17,8 @@ public class Trips extends ArrayList<Trip> {
 		String string = "List of trips:\n";
 		
 		for (Trip trip : this){
-			string += trip.flights.get(0).departureAirport.code() + " | ";
-			string += trip.flights.get(trip.flights.size()-1).arrivalAirport.code() + " | ";
+			string += trip.flights.get(0).getDepartureAirport().code() + " | ";
+			string += trip.flights.get(trip.flights.size()-1).getArrivalAirport().code() + " | ";
 			string += trip.getDuration() + "mins\n";
 		}
 		

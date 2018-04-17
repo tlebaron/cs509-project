@@ -107,7 +107,7 @@ public class Driver {
 		System.out.println("\nReserve seats and return result(s)");
 //		ServerInterface.INSTANCE.reserve_ticket(teamName, xmlFlights);
 		Flight myFlight = new Flight();
-		myFlight.flightNumber = 3809;
+		myFlight.setFlightNumber(3809);
 		Flights myFlights = new Flights();
 		myFlights.add(myFlight);
 		String seattype = new String("Coach");// FirstClass

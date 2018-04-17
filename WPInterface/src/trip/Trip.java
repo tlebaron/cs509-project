@@ -50,10 +50,10 @@ public class Trip {
 	}
 	
 	public long getDepartureTime(){
-		return flights.get(0).departureTimeGMT.getTime().getTime();
+		return flights.get(0).getDepartureTimeGMT().getTime().getTime();
 	}
 	
 	public long getArrivalTime(){
-		return flights.get(flights.size()-1).arrivalTimeGMT.getTime().getTime();
+		return flights.get(flights.size()-1).getArrivalTimeGMT().getTime().getTime();
 	}
 }
