@@ -101,9 +101,9 @@ public class Flight {
 	public double getPrice(SeatClass seatClass) {
 		switch(seatClass) {
 			case COACH:
-				return coachSeating.price;
+				return coachSeating.getPrice();
 			case FIRSTCLASS:
-				return firstClassSeating.price;
+				return firstClassSeating.getPrice();
 			default:
 				return -1;
 				

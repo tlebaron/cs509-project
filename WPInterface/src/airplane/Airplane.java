@@ -338,4 +338,24 @@ public class Airplane {
 		}
 		return isValidNum_firstClassSeats (temp_num);
 	}
+	
+	public Seats getCoachSeats(){
+		return this.coachSeats;
+	}
+	
+	public Seats getFirstClassSeats(){
+		return this.firstClassSeats;
+	}
+	
+	public double getPrice(SeatClass seatClass) {
+		switch(seatClass) {
+			case COACH:
+				return coachSeats.getPrice();
+			case FIRSTCLASS:
+				return firstClassSeats.getPrice();
+			default:
+				return -1;
+				
+		}
+	}
 }

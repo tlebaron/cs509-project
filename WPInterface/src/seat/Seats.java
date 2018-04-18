@@ -11,4 +11,12 @@ public class Seats {
 	public void setNumberOfSeats(int number){
 		this.numberOfSeats = number;
 	}
+	
+	public double getPrice(){
+		return price;
+	}
+	
+	public void setPrice(double p){
+		price = p;
+	}
 }

@@ -51,10 +51,10 @@ public class Trips extends ArrayList<Trip> {
 		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
 		
 		
-		System.out.println("Available trips:");
-		System.out.println("ID \t|\t Departure Airport \t|\t Arrival Airport \t|\t "
+		System.out.println("Available trips:" + this.size());
+		System.out.println("ID \t|\t Departure \t|\t Arrival \t|\t "
 				+ "Duration \t|\t Price \t|\t Dearture Time \t|\t Arrival Time  \t|\t "
-				+ "Seats");
+				+ "Seats \t|");
 		
 		HashMap<Integer, Trip> hashList = createList(maxStepOver);
 		
@@ -66,14 +66,17 @@ public class Trips extends ArrayList<Trip> {
 			Trip trip = (Trip)mEntry.getValue();
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append(trip.getDepartureAirportCode() + " \t|\t ");
-			sb.append(trip.getArrivalAirportCode() + " \t|\t ");
-			sb.append(trip.getDuration() + " \t|\t ");
+			sb.append(mEntry.getKey() + " \t|\t ");
+			sb.append(trip.getDepartureAirportCode() + " \t\t|\t ");
+			sb.append(trip.getArrivalAirportCode() + " \t\t|\t ");
+			sb.append(trip.getDurationFormat() + " \t\t|\t ");
 			sb.append(trip.getPrice(preferences.getTripClass()) + " \t|\t ");
-			sb.append(trip.getDepartureTime() + " \t|\t ");
-			sb.append(trip.getArrivalTime() + " \t|\t ");
+			sb.append(trip.getTimeFormat(trip.getDepartureTimeGMT()) + " \t|\t ");
+			sb.append(trip.getTimeFormat(trip.getArrivalTimeGMT()) + " \t|\t ");
 			sb.append(trip.getAvailableSeats(preferences.getTripClass()) + " \t|\t ");
+			System.out.println(sb);
 		}
+		
 		
 	}
 }

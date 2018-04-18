@@ -3,6 +3,7 @@ package trip;
 import flight.Flight;
 import static java.lang.Math.toIntExact;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import flight.Flights;
@@ -45,23 +46,38 @@ public class Trip {
 	}
 	
 	public int getDuration(){
-		return toIntExact((getArrivalTime() - getDepartureTime())  / (1000 * 60));
+		return toIntExact((getArrivalTimeGMT() - getDepartureTimeGMT())  / (1000 * 60));
+	}
+	public String getDurationFormat(){
+		String duration;
+		int durationMin = this.getDuration();
+		String hours = String.valueOf((durationMin - durationMin%60)/60);
+		String min = String.valueOf(durationMin%60);
+		if (min.length() == 1) min = "0"+min;
+		duration = ( hours + "h" + min);
+		return duration;
 	}
 	
 	public double getPrice(SeatClass seatClass){
 		double price = 0;
 		for (Flight flight : flights){
-			price += flight.getPrice(seatClass);
+			price += flight.getAirplane().getPrice(seatClass);
 		}
 		return price;
 	}
 	
-	public long getDepartureTime(){
+	public long getDepartureTimeGMT(){
 		return flights.get(0).getDepartureTimeGMT().getTime().getTime();
 	}
 	
-	public long getArrivalTime(){
+	public long getArrivalTimeGMT(){
 		return flights.get(flights.size()-1).getArrivalTimeGMT().getTime().getTime();
+	}
+	
+	public String getTimeFormat(long time){
+		DateFormat formater =  DateFormat.getDateInstance(DateFormat.SHORT);
+		String date = formater.format(new Date(time));
+		return date;
 	}
 	
 	public String getDepartureAirportCode(){
