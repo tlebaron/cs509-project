@@ -47,6 +47,7 @@ public class Trips extends ArrayList<Trip> {
 	}
 	
 	public void displayTrips(){
+		//TODO remove that and deal with it
 		int maxStepOver = 2;
 		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
 		
