@@ -74,6 +74,14 @@ public class Trip {
 		return flights.get(flights.size()-1).getArrivalTimeGMT().getTime().getTime();
 	}
 	
+	public long getDepartureTimeLocal(){
+		return flights.get(0).getDepartureTimeLocal().getTime().getTime();
+	}
+	
+	public long getArrivalTimeLocal(){
+		return flights.get(flights.size()-1).getArrivalTimeLocal().getTime().getTime();
+	}
+	
 	public String getTimeFormat(long time){
 		DateFormat formater =  DateFormat.getDateInstance(DateFormat.SHORT);
 		String date = formater.format(new Date(time));
