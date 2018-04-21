@@ -33,15 +33,5 @@ public class SearchTrip {
 		}
 		
 		return trips;
-	}
-	
-	private Trips searchTripsByArrivalAirport(String teamName, Calendar date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public Flights searchArrivingFlightsOn(String teamName, Airport arrivalAirport, Calendar arrivalDate) {
-		Flights flights = ServerInterface.INSTANCE.getArrivingFlights(arrivalAirport.code(), arrivalDate, teamName);
-		return flights;
-	}
+  }
 }

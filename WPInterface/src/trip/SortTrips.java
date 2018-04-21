@@ -52,7 +52,7 @@ public class SortTrips {
 		Collections.sort(listTripsInput, new Comparator<Trip>() {
 			@Override
 			public int compare(Trip trip1, Trip trip2){
-				return (int) (trip1.getDepartureTime() - trip2.getDepartureTime());
+				return (int) (trip1.getDepartureTimeGMT() - trip2.getDepartureTimeGMT());
 			}
 		});
 		
@@ -69,7 +69,7 @@ public class SortTrips {
 		Collections.sort(listTripsInput, new Comparator<Trip>() {
 			@Override
 			public int compare(Trip trip1, Trip trip2){
-				return (int) (trip1.getArrivalTime() - trip2.getArrivalTime());
+				return (int) (trip1.getArrivalTimeGMT() - trip2.getArrivalTimeGMT());
 			}
 		});
 		

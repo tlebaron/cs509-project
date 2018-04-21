@@ -131,7 +131,7 @@ public class reserve {
 			for(int j=0;j<this.getNumFlights();j++){
 				flight=this.getFlight(j);
 				flight_xml=message.createElement("Flight");
-				flight_xml.setAttribute("number",Integer.toString(flight.flightNumber));
+				flight_xml.setAttribute("number",Integer.toString(flight.getFlightNumber()));
 				flight_xml.setAttribute("seating",mSeatPreference);
 				root.appendChild(flight_xml);
 			}

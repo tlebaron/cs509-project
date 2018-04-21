@@ -224,7 +224,7 @@ public class DaoFlights {
 		}
 		firstClassSeat.price = n.doubleValue();
 		//number
-		firstClassSeat.numberOfSeats = Integer.parseInt(getCharacterDataFromElement(elementSFC));
+		firstClassSeat.setNumberOfSeats(Integer.parseInt(getCharacterDataFromElement(elementSFC)));
 		
 		//First class
 		Element elementSC;
@@ -234,7 +234,7 @@ public class DaoFlights {
 		xmlSeat = xmlSeat.substring(1);
 		coachSeat.price = Double.parseDouble(xmlSeat);
 		//number
-		coachSeat.numberOfSeats = Integer.parseInt(getCharacterDataFromElement(elementSC));
+		coachSeat.setNumberOfSeats(Integer.parseInt(getCharacterDataFromElement(elementSC)));
 		
 		
 		
@@ -242,15 +242,15 @@ public class DaoFlights {
 		/**
 		 * Update the Flight object with values from XML node
 		 */
-		Flight.airplane = airplane;
-		Flight.flightTime = flightTime;
-		Flight.flightNumber = flightNumber;
-		Flight.departureAirport = departureAirport;
-		Flight.arrivalAirport = arrivalAirport;
-		Flight.departureTimeGMT = departureTime;
-		Flight.arrivalTimeGMT = arrivalTime;
-		Flight.firstClassSeating = firstClassSeat;
-		Flight.coachSeating = coachSeat;
+		Flight.setAirplane(airplane);
+		Flight.setFlightTime(flightTime);
+		Flight.setFlightNumber(flightNumber);
+		Flight.setDepartureAirport(departureAirport);
+		Flight.setArrivalAirport(arrivalAirport);
+		Flight.setDepartureTimeGMT(departureTime);
+		Flight.setArrivalTimeGMT(arrivalTime);
+		Flight.setFirstClassSeating(firstClassSeat);
+		Flight.setCoachSeating(coachSeat);
 		
 		return Flight;
 	}

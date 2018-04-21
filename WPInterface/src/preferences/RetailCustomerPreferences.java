@@ -39,6 +39,13 @@ public class RetailCustomerPreferences {
 		return instance;
 	}
 	
+	public SeatClass getTripClass(){
+		return this.tripClass;
+	}
+	public void setTripClass(SeatClass sClass){
+		this.tripClass = sClass;
+	}
+	
 	public Calendar searchDate() {
 		return searchDate;
 	}
