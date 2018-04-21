@@ -72,9 +72,9 @@ public class Trips extends ArrayList<Trip> {
 			sb.append(trip.getArrivalAirportCode() + " \t\t|\t ");
 			sb.append(trip.getDurationFormat() + " \t\t|\t ");
 			sb.append(trip.getPrice(preferences.getTripClass()) + " \t|\t ");
-			sb.append(trip.getTimeFormat(trip.getDepartureTimeLocal()) + " \t|\t ");
-			sb.append(trip.getTimeFormat(trip.getArrivalTimeLocal()) + " \t|\t ");
-			sb.append(trip.getAvailableSeats(preferences.getTripClass()) + " \t|\t ");
+			sb.append(trip.getTimeFormat(trip.getDepartureTimeLocal()) + " |\t ");
+			sb.append(trip.getTimeFormat(trip.getArrivalTimeLocal()) + " |\t ");
+			sb.append(trip.getAvailableSeats(preferences.getTripClass()) + " \t|");
 			System.out.println(sb);
 		}
 		

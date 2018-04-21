@@ -60,8 +60,19 @@ public class Trip {
 	
 	public double getPrice(SeatClass seatClass){
 		double price = 0;
-		for (Flight flight : flights){
-			price += flight.getAirplane().getPrice(seatClass);
+		switch(seatClass){
+			case COACH:
+				for (Flight flight : flights){
+					price += flight.getCoachSeating().getPrice();
+				}
+				break;
+			case FIRSTCLASS:
+				for (Flight flight : flights){
+					price += flight.getFirstClassSeating().getPrice();
+				}
+				break;
+			default:
+				return -1;
 		}
 		return price;
 	}
@@ -83,7 +94,7 @@ public class Trip {
 	}
 	
 	public String getTimeFormat(long time){
-		DateFormat formater =  DateFormat.getDateInstance(DateFormat.SHORT);
+		DateFormat formater =  DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		String date = formater.format(new Date(time));
 		return date;
 	}
