@@ -49,6 +49,7 @@ public class TestTrips {
 		Trips trips = Initialize();
 		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
 		preferences.setTripClass(SeatClass.COACH);
+		trips.getNewMaxStepOver();
 		trips.displayTrips();
 	}
 

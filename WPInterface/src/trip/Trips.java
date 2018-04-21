@@ -1,12 +1,15 @@
 package trip;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 import preferences.RetailCustomerPreferences;
+import seat.SeatClass;
 
 
 /**
@@ -19,6 +22,7 @@ import preferences.RetailCustomerPreferences;
  */
 public class Trips extends ArrayList<Trip> {
 	private static final long serialVersionUID = 1L;
+	private int maxStepOver = 2;
 	
 	public String toString(){
 		String string = "List of trips:\n";
@@ -36,7 +40,7 @@ public class Trips extends ArrayList<Trip> {
 		HashMap<Integer, Trip> hashList = new HashMap<Integer, Trip>();
 		
 		for (Trip trip : this){
-			if (trip.getFlights().size() > maxStopOver) continue;
+			if (trip.getFlights().size() > maxStopOver+1) continue;
 			hashList.put(this.indexOf(trip), trip);
 		}
 		
@@ -45,10 +49,27 @@ public class Trips extends ArrayList<Trip> {
 	public HashMap<Integer, Trip> createList(){
 		return createList(2);
 	}
+		
+	public void getNewMaxStepOver(){
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("What is the maximum number of step over wanted? (max = 2)");
+		while(true) {
+			try {
+				int maxSO = Integer.parseInt(sc.next());
+				if (maxSO < 3 || maxSO > -1) {
+					maxStepOver = maxSO;
+					break;
+					}
+				else System.out.println("Please pick a number between 0, 1 and 2");
+			} catch (Exception e) {
+				System.out.println("Please pick a number between 0, 1 and 2");
+				continue;
+			}
+		}
+	}
 	
 	public void displayTrips(){
-		//TODO remove that and deal with it
-		int maxStepOver = 2;
 		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
 		
 		
