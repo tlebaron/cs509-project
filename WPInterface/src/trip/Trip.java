@@ -22,6 +22,10 @@ public class Trip {
 		flights.add(flight);
 	}
 	
+	public void addFlightToBeginning(Flight flight) {
+		flights.add(0, flight);
+	}
+	
 	public Flight getFlight(int index){
 		return flights.get(index);
 	}
