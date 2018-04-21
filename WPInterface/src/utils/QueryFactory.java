@@ -32,6 +32,16 @@ public class QueryFactory {
 		return url;
 	}
 	
+	public static String getFlightsFromArrival(String airportCode, Calendar arrivalDate, String teamName) {
+		String month = Integer.toString(arrivalDate.get(Calendar.MONTH)+ 1);
+		if(month.length() < 2) month = "0" + month;
+		String url = "?team=" + teamName + "&action=list" +
+				"&list_type=arriving" + "&airport=" + airportCode + 
+				"&day=" + arrivalDate.get(1) + "_" + month + "_" + arrivalDate.get(5);
+		
+		return url;
+	}
+	
 	/**
 	 * Return a query string that can be passed to HTTP URL to request list of airports
 	 * 

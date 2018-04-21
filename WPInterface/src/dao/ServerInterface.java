@@ -46,7 +46,7 @@ public enum ServerInterface {
 	 * 
 	 * @return collection of flights
 	 */
-	public Flights getFlights(String airportCode, Calendar departureDate, String teamName){
+	public Flights getDepartingFlights(String airportCode, Calendar departureDate, String teamName){
 		URL url;
 		HttpURLConnection connection;
 		BufferedReader reader;
@@ -61,6 +61,53 @@ public enum ServerInterface {
 			 * Create an HTTP connection to the server for a GET 
 			 */
 			url = new URL(mUrlBase + QueryFactory.getFlightsFromDeparture(airportCode, departureDate, teamName));
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("User-Agent", teamName);
+
+			/**
+			 * If response code of SUCCESS read the XML string returned
+			 * line by line to build the full return string
+			 */
+			int responseCode = connection.getResponseCode();
+			if (responseCode >= HttpURLConnection.HTTP_OK) {
+				InputStream inputStream = connection.getInputStream();
+				String encoding = connection.getContentEncoding();
+				encoding = (encoding == null ? "UTF-8" : encoding);
+
+				reader = new BufferedReader(new InputStreamReader(inputStream));
+				while ((line = reader.readLine()) != null) {
+					result.append(line);
+				}
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		xmlFlights = result.toString();
+		flights = DaoFlights.addAll(xmlFlights);
+		
+		return flights;
+	}
+	
+	public Flights getArrivingFlights(String airportCode, Calendar arrivalDate, String teamName){
+		URL url;
+		HttpURLConnection connection;
+		BufferedReader reader;
+		String line;
+		StringBuffer result = new StringBuffer();
+		
+		String xmlFlights;
+		Flights flights;
+		
+		try {
+			/**
+			 * Create an HTTP connection to the server for a GET 
+			 */
+			url = new URL(mUrlBase + QueryFactory.getFlightsFromArrival(airportCode, arrivalDate, teamName));
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("User-Agent", teamName);
