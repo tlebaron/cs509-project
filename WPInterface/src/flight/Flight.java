@@ -87,15 +87,24 @@ public class Flight {
 	}
 	
 	public Calendar getDepartureTimeLocal(){
+		if (this.departureTimeLocal != null) return this.departureTimeLocal;
 		Calendar timeCalendar = (Calendar) departureTimeGMT.clone();
 		timeCalendar.setTimeZone(TimeZone.getTimeZone(this.departureAirport.getTimeZoneID()));
 		return timeCalendar;
 	}
 	
 	public Calendar getArrivalTimeLocal(){
+		if (this.arrivalTimeLocal != null) return this.arrivalTimeLocal;
 		Calendar timeCalendar = (Calendar) arrivalTimeGMT.clone();
 		timeCalendar.setTimeZone(TimeZone.getTimeZone(this.arrivalAirport.getTimeZoneID()));
 		return timeCalendar;
+	}
+	
+	public void setDepartureTimeLocal(Calendar time){
+		this.departureTimeLocal = time;
+	}
+	public void setArrivalTimeLocal(Calendar time){
+		this.arrivalTimeLocal = time;
 	}
 	
 	

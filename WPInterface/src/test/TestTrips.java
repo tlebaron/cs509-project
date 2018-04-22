@@ -30,11 +30,12 @@ public class TestTrips {
 		flight.getDepartureTimeGMT().set(2018, 04, 22, 9, 00);
 		flight.setArrivalTimeGMT(Calendar.getInstance());
 		flight.getArrivalTimeGMT().set(2018, 04, 22, 11, 00);
-		//flight.setDepartureTimeLocal(Calendar.getInstance());
+		flight.setDepartureTimeLocal(Calendar.getInstance());
 		flight.getDepartureTimeLocal().set(2018, 04, 22, 9, 00);
-		//flight.setArrivalTimeLocal(Calendar.getInstance());
+		flight.setArrivalTimeLocal(Calendar.getInstance());
 		flight.getArrivalTimeLocal().set(2018, 04, 22, 11, 00);
 		flight.setAirplane(new Airplane());
+		flight.getAirplane().num_coachSeats(15);
 		flight.setCoachSeating(new Seats());
 		flight.getCoachSeating().setNumberOfSeats(10);
 		flight.getCoachSeating().setPrice(10);
