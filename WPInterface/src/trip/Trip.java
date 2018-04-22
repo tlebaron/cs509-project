@@ -116,15 +116,15 @@ public class Trip {
 		
 		switch(tripClass){
 			case COACH:
-				availableSeats = this.flights.get(0).getCoachSeating().getNumberOfSeats();
+				availableSeats = this.flights.get(0).getAirplane().getCoachSeats().getNumberOfSeats() - this.flights.get(0).getCoachSeating().getNumberOfSeats();
 				for (Flight flight : flights){
-					availableSeats = Math.min(availableSeats, flight.getCoachSeating().getNumberOfSeats());
+					availableSeats = Math.min(availableSeats, flight.getAirplane().getCoachSeats().getNumberOfSeats() - flight.getCoachSeating().getNumberOfSeats());
 				}
 				break;
 			case FIRSTCLASS:
-				availableSeats = this.flights.get(0).getFirstClassSeating().getNumberOfSeats();
+				availableSeats = this.flights.get(0).getAirplane().getFirstClassSeats().getNumberOfSeats() - this.flights.get(0).getFirstClassSeating().getNumberOfSeats();
 				for (Flight flight : flights){
-					availableSeats = Math.min(availableSeats, flight.getFirstClassSeating().getNumberOfSeats());
+					availableSeats = Math.min(availableSeats, flight.getAirplane().getFirstClassSeats().getNumberOfSeats() - flight.getFirstClassSeating().getNumberOfSeats());
 				}
 				break;
 		}
