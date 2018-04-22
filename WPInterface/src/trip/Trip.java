@@ -35,6 +35,10 @@ public class Trip {
 		return flights.get(index);
 	}
 	
+	public Trip getfollowingTrip() {
+		return this.followingTrip;
+	}
+	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		

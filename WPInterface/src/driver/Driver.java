@@ -77,7 +77,12 @@ public class Driver {
 		
 		onwardSelectedTrip.setReturnTrip(returnSelectedTrip);
 		showSelectedTripDetails(onwardSelectedTrip, returnSelectedTrip);
-		//reserveSeat();
+		System.out.println("\nBooking flights for onward selected trip...");
+		reserveSeat(onwardSelectedTrip.getFlights());
+		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
+			System.out.println("\nBooking flights for return selected trip...");
+			reserveSeat(onwardSelectedTrip.getfollowingTrip().getFlights());
+		}
 	}
 	
 	private static void showSelectedTripDetails(Trip onwardSelectedTrip, Trip returnSelectedTrip) {
@@ -178,13 +183,9 @@ public class Driver {
 		airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 	}
 	
-	private static void reserveSeat() {
+	private static void reserveSeat(Flights myFlights) {
 		System.out.println("\nReserve seats and return result(s)");
 //		ServerInterface.INSTANCE.reserve_ticket(teamName, xmlFlights);
-		Flight myFlight = new Flight();
-		myFlight.setFlightNumber(3809);
-		Flights myFlights = new Flights();
-		myFlights.add(myFlight);
 		String seattype = new String("Coach");// FirstClass
 		
 		reserve nowreserve = new reserve(myFlights);
