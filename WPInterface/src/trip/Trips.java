@@ -25,6 +25,7 @@ import seat.SeatClass;
 public class Trips extends ArrayList<Trip> {
 	private static final long serialVersionUID = 1L;
 	private int maxStepOver = 2;
+	private HashMap<Integer, Trip> tripMap;
 	
 	public String toString(){
 		String string = "List of trips:\n";
@@ -71,6 +72,10 @@ public class Trips extends ArrayList<Trip> {
 		}
 	}
 	
+	public Trip getTripForNum(Integer tripNum) {
+		return tripMap.get(tripNum);
+	}
+	
 	public void displayTrips(){
 		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
 		
@@ -83,7 +88,7 @@ public class Trips extends ArrayList<Trip> {
 				+ "-------------------------------------------------");
 		
 		HashMap<Integer, Trip> hashList = createList(maxStepOver);
-		
+		this.tripMap = hashList;
 		// use iterator to run on the map
 		Set set = hashList.entrySet();
 		Iterator iterator = set.iterator();
