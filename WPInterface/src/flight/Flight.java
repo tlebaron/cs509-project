@@ -1,5 +1,8 @@
 package flight;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
+
 import airplane.Airplane;
 import airport.Airport;
 import seat.SeatClass;
@@ -84,17 +87,16 @@ public class Flight {
 	}
 	
 	public Calendar getDepartureTimeLocal(){
-		return this.departureTimeLocal;
-	}
-	public void setDepartureTimeLocal(Calendar time){
-		this.departureTimeLocal = time;
+		Calendar timeCalendar = (Calendar) departureTimeGMT.clone();
+		System.out.println("timezone: " + this.departureAirport.getTimeZoneID());
+		timeCalendar.setTimeZone(TimeZone.getTimeZone(this.departureAirport.getTimeZoneID()));
+		return timeCalendar;
 	}
 	
 	public Calendar getArrivalTimeLocal(){
-		return this.arrivalTimeLocal;
-	}
-	public void setArrivalTimeLocal(Calendar time){
-		this.arrivalTimeLocal = time;
+		Calendar timeCalendar = (Calendar) arrivalTimeGMT.clone();
+		timeCalendar.setTimeZone(TimeZone.getTimeZone(this.arrivalAirport.getTimeZoneID()));
+		return timeCalendar;
 	}
 	
 	
@@ -149,14 +151,17 @@ public class Flight {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		
-		String departureHour = Integer.toString(departureTimeGMT.get(10));
+		String departureHour = Integer.toString(departureTimeGMT.get(Calendar.HOUR));
 		if (departureHour.length()<2) departureHour = "0"+departureHour;
-		String departureMinute = Integer.toString(departureTimeGMT.get(12));
+		String departureMinute = Integer.toString(departureTimeGMT.get(Calendar.MINUTE));
 		if (departureMinute.length()<2) departureMinute = "0"+departureMinute;
-		String arrivalHour = Integer.toString(arrivalTimeGMT.get(10));
+		String arrivalHour = Integer.toString(arrivalTimeGMT.get(Calendar.HOUR));
 		if (arrivalHour.length()<2) arrivalHour = "0"+arrivalHour;
-		String arrivalMinute = Integer.toString(arrivalTimeGMT.get(12));
+		String arrivalMinute = Integer.toString(arrivalTimeGMT.get(Calendar.MINUTE));
 		if (arrivalMinute.length()<2) arrivalMinute = "0"+arrivalMinute;
+		
+		Calendar departureTimeLocal = this.getDepartureTimeLocal();
+		Calendar arrivalTimeLocal = this.getArrivalTimeLocal();
 		
 		//sb.append(manufacturer).append(", ");
 		//sb.append(Integer.toString(coachSeats.numberOfSeats)).append(", ");
@@ -166,8 +171,10 @@ public class Flight {
 		sb.append("Duration: "+Integer.toString(flightTime)+" minutes\n");
 		sb.append("Number of first class seats booked: "+Integer.toString(firstClassSeating.getNumberOfSeats())+ " at $" + Double.toString(firstClassSeating.price)  + "\n");
 		sb.append("Number of economy seats booked: "+Integer.toString(coachSeating.getNumberOfSeats())+ " at $" + Double.toString(coachSeating.price)  + "\n");
-		sb.append("Departure Time (GMT): "+departureTimeGMT.get(2)+"/"+departureTimeGMT.get(5)+"/"+departureTimeGMT.get(1)+" at "+departureHour+":"+departureMinute + "\n");
-		sb.append("Arrival Time (GMT): "+arrivalTimeGMT.get(2)+"/"+arrivalTimeGMT.get(5)+"/"+arrivalTimeGMT.get(1)+" at "+arrivalHour+":" + arrivalMinute + "\n");
+		sb.append("Departure Time (GMT): "+departureTimeGMT.get(Calendar.MONTH)+"/"+departureTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeGMT.get(Calendar.YEAR)+" at "+departureHour+":"+departureMinute + "\n");
+		sb.append("Arrival Time (GMT): "+arrivalTimeGMT.get(Calendar.MONTH)+"/"+arrivalTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeGMT.get(Calendar.YEAR)+" at "+arrivalHour+":" + arrivalMinute + "\n");
+		sb.append("Departure Time (Local): "+departureTimeLocal.get(Calendar.MONTH)+"/"+departureTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeLocal.get(Calendar.YEAR)+" at "+departureTimeLocal.get(Calendar.HOUR)+":"+departureTimeLocal.get(Calendar.MINUTE) + "\n");
+		sb.append("Departure Time (Local): "+arrivalTimeLocal.get(Calendar.MONTH)+"/"+arrivalTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeLocal.get(Calendar.YEAR)+" at "+arrivalTimeLocal.get(Calendar.HOUR)+":"+arrivalTimeLocal.get(Calendar.MINUTE) + "\n");
 		sb.append("----------");
 
 		return sb.toString();

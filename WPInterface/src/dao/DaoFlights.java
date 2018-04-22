@@ -8,7 +8,9 @@ import java.io.StringReader;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +26,7 @@ import org.xml.sax.SAXException;
 
 import airplane.Airplane;
 import airport.Airport;
+import airport.Airports;
 import flight.Flight;
 import flight.Flights;
 import seat.SeatClass;
@@ -52,7 +55,7 @@ public class DaoFlights {
 	 * @pre the xmlFlights string adheres to the format specified by the server API
 	 * @post the [possibly empty] set of Flights in the XML string are added to collection
 	 */
-	public static Flights addAll (String xmlFlights) throws NullPointerException {
+	public static Flights addAll (String xmlFlights, Airports airports) throws NullPointerException {
 		Flights Flights = new Flights();
 		
 		// Load the XML string into a DOM tree for ease of processing
@@ -62,7 +65,7 @@ public class DaoFlights {
 		
 		for (int i = 0; i < nodesFlights.getLength(); i++) {
 			Element elementFlight = (Element) nodesFlights.item(i);
-			Flight Flight = buildFlight (elementFlight);
+			Flight Flight = buildFlight (elementFlight, airports);
 			
 			//if (Flight.isValid()) {
 				Flights.add(Flight);
@@ -84,7 +87,7 @@ public class DaoFlights {
 	 * 
 	 */
 	static private Calendar timeStringToCal(String timeString){
-		Calendar timeCalendar = Calendar.getInstance();
+		Calendar timeCalendar = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
 		
 		String[] stringPart = timeString.split(" ");
 		
@@ -146,7 +149,7 @@ public class DaoFlights {
 	 * 
 	 * @pre nodeFlight is of format specified by CS509 server API
 	 */
-	static private Flight buildFlight (Node nodeFlight) {
+	static private Flight buildFlight (Node nodeFlight, Airports airports) {
 		/**
 		 * Instantiate an empty Flight object
 		 */
@@ -155,10 +158,12 @@ public class DaoFlights {
 		Airplane airplane;
 		int flightTime;
 		int flightNumber;
-		Airport departureAirport = new Airport();
-		Airport arrivalAirport = new Airport();
+		Airport departureAirport;
+		Airport arrivalAirport;
 		Calendar departureTime;
 		Calendar arrivalTime;
+		String departureAirportCode;
+		String arrivalAirportCode;
 		
 		Seats coachSeat = new Seats();
 		coachSeat.seatClass = SeatClass.COACH;
@@ -183,7 +188,7 @@ public class DaoFlights {
 		//code and time of departure
 		Element elementDCode;
 		elementDCode = (Element)elementDeparture.getElementsByTagName("Code").item(0);
-		departureAirport.code(getCharacterDataFromElement(elementDCode));
+		departureAirportCode = getCharacterDataFromElement(elementDCode);
 		Element elementDTime;
 		elementDTime = (Element)elementDeparture.getElementsByTagName("Time").item(0);
 		xmlTime = getCharacterDataFromElement(elementDTime);
@@ -197,7 +202,7 @@ public class DaoFlights {
 		//code and time of departure
 		Element elementACode;
 		elementACode = (Element)elementArrival.getElementsByTagName("Code").item(0);
-		arrivalAirport.code(getCharacterDataFromElement(elementACode));
+		arrivalAirportCode = getCharacterDataFromElement(elementACode);
 		Element elementATime;
 		elementATime = (Element)elementArrival.getElementsByTagName("Time").item(0);
 		xmlTime = getCharacterDataFromElement(elementATime);
@@ -245,14 +250,24 @@ public class DaoFlights {
 		Flight.setAirplane(airplane);
 		Flight.setFlightTime(flightTime);
 		Flight.setFlightNumber(flightNumber);
-		Flight.setDepartureAirport(departureAirport);
-		Flight.setArrivalAirport(arrivalAirport);
+		Flight.setDepartureAirport(findAirport(departureAirportCode, airports));
+		Flight.setArrivalAirport(findAirport(arrivalAirportCode, airports));
 		Flight.setDepartureTimeGMT(departureTime);
 		Flight.setArrivalTimeGMT(arrivalTime);
 		Flight.setFirstClassSeating(firstClassSeat);
 		Flight.setCoachSeating(coachSeat);
 		
 		return Flight;
+	}
+
+	private static Airport findAirport(String airportCode, Airports airports) {
+		// TODO Auto-generated method stub
+		for (Airport a : airports) {
+			if (a.code().equals(airportCode)) {
+				return a;
+			}
+		}
+		return null;
 	}
 
 	/**

@@ -46,7 +46,7 @@ public enum ServerInterface {
 	 * 
 	 * @return collection of flights
 	 */
-	public Flights getDepartingFlights(String airportCode, Calendar departureDate, String teamName){
+	public Flights getDepartingFlights(String airportCode, Calendar departureDate, String teamName, Airports airports){
 		URL url;
 		HttpURLConnection connection;
 		BufferedReader reader;
@@ -88,12 +88,12 @@ public enum ServerInterface {
 		}
 
 		xmlFlights = result.toString();
-		flights = DaoFlights.addAll(xmlFlights);
+		flights = DaoFlights.addAll(xmlFlights, airports);
 		
 		return flights;
 	}
 	
-	public Flights getArrivingFlights(String airportCode, Calendar arrivalDate, String teamName){
+	public Flights getArrivingFlights(String airportCode, Calendar arrivalDate, String teamName, Airports airports){
 		URL url;
 		HttpURLConnection connection;
 		BufferedReader reader;
@@ -135,7 +135,7 @@ public enum ServerInterface {
 		}
 
 		xmlFlights = result.toString();
-		flights = DaoFlights.addAll(xmlFlights);
+		flights = DaoFlights.addAll(xmlFlights, airports);
 		
 		return flights;
 	}

@@ -31,21 +31,18 @@ public class GMTConversionInterface {
 	StringBuffer result = new StringBuffer();
 	String GMTConversion;
 	
-	public Float getOffset(Double airportLatitude, Double airportLongitude, Calendar departureDate) {
+	public String getTimeZone(Double airportLatitude, Double airportLongitude, Calendar departureDate) {
 		request(airportLatitude, airportLongitude, departureDate);
 		Document docTimeDiff = buildDomDoc (GMTConversion);
 		NodeList nodes = docTimeDiff.getElementsByTagName("TimeZoneResponse");
-		Float rawTimeDiff = null, dayLightSavings = null;
+		String timeZoneID = null;
 		for(int i = 0; i < nodes.getLength(); i++) {
 			Element timeZoneResponse = (Element) nodes.item(i);
-			Element rawOffset, dstOffset;
-			rawOffset = (Element)timeZoneResponse.getElementsByTagName("raw_offset").item(0);
-			dstOffset = (Element)timeZoneResponse.getElementsByTagName("dst_offset").item(0);
-			rawTimeDiff = Float.parseFloat(getCharacterDataFromElement(rawOffset));
-			dayLightSavings = Float.parseFloat(getCharacterDataFromElement(dstOffset));
-
+			Element id;
+			id = (Element)timeZoneResponse.getElementsByTagName("time_zone_id").item(0);
+			timeZoneID = getCharacterDataFromElement(id);
 		}
-		return rawTimeDiff; //+ dayLightSavings;
+		return timeZoneID;
 	}
 	
 	/**

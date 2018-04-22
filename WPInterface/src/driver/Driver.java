@@ -46,7 +46,7 @@ public class Driver {
 	public static void main(String[] args) {
 		initializeSystem();
 		//printBOSFlights();
-		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences);
+		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports);
 		Trips trips = searchTrip.search(teamName);
 		System.out.println("Size of trips: " + trips.size());
 		for (Trip t : trips) {
@@ -60,7 +60,7 @@ public class Driver {
 		Calendar departureDate = Calendar.getInstance();
 		departureDate.set(2018,5,12);
 		System.out.println("Date : "+departureDate.get(1)+"_"+departureDate.get(2)+"_"+departureDate.get(5));
-		Flights flights = ServerInterface.INSTANCE.getDepartingFlights("BOS", departureDate, teamName);
+		Flights flights = ServerInterface.INSTANCE.getDepartingFlights("BOS", departureDate, teamName, airports);
 		for (Flight flight : flights){
 			System.out.println(flight.toString()); 
 		}
@@ -70,7 +70,7 @@ public class Driver {
 		initializeAirports();
 		retailCustomerPreferences.getRetailCustomerPreferences(airports);
 		retailCustomerPreferences.printRetailCustomerPreferences();
-		//initializeTimeOffsets();
+		initializeTimeOffsets();
 		initializeAirplanes();
 	}
 	
@@ -88,8 +88,9 @@ public class Driver {
 		GMTConversionInterface gmtInterface;
 		for(Airport a : airports) {
 			gmtInterface = new GMTConversionInterface();
-			Float offset = gmtInterface.getOffset(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
-			a.gmtOffset(offset);
+			String timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
+			System.out.println(timeZone);
+			a.setTimeZoneID(timeZone);
 		}
 	}
 	
