@@ -77,6 +77,7 @@ public class Driver {
 		
 		onwardSelectedTrip.setReturnTrip(returnSelectedTrip);
 		showSelectedTripDetails(onwardSelectedTrip, returnSelectedTrip);
+		// now reserveSeats for the selected flights
 		System.out.println("\nBooking flights for onward selected trip...");
 		reserveSeat(onwardSelectedTrip.getFlights());
 		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
