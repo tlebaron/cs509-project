@@ -336,6 +336,9 @@ public enum ServerInterface {
 
 				System.out.println(response.toString());
 			}
+			else {
+				System.out.println("\nReservation Failed! Please try again later.");
+			}
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();

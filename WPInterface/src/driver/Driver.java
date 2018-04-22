@@ -3,10 +3,12 @@
  */
 package driver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import airport.Airport;
 import airport.Airports;
@@ -19,6 +21,7 @@ import preferences.RetailCustomerPreferences;
 import search.SearchTrip;
 import timeconversion.GMTConversionInterface;
 import trip.Trip;
+import trip.TripType;
 import trip.Trips;
 import reservation.reserve;
 
@@ -35,7 +38,7 @@ public class Driver {
 	static Airplanes airplanes;
 	
 	/**
-	 * Entry point for CS509 sample code driver
+	 * Entry point for CS509 code driver
 	 * 
 	 * This driver will retrieve the list of airports from the CS509 server and print the list 
 	 * It will also retrieve the list of airplanes from the CS509 server and print the list
@@ -50,9 +53,65 @@ public class Driver {
 		Trips trips = searchTrip.search(teamName);
 		System.out.println("Size of trips: " + trips.size());
 		for (Trip t : trips) {
+			int count = 0;
+			System.out.println("index = "+count+" :");
 			System.out.println(t.toString());
+			count ++;
 		}
+		askForOperation();
+		Scanner sc = new Scanner(System.in);
+		try {
+			if(OperationJudgement(sc)) {
+				System.out.println("\nEverything done now! Wish you a good day!");
+			}else {
+				System.out.println("Something is not functioning well. System shutting down.");
+			}
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		//reserveSeat();
+	}
+	private static Boolean OperationJudgement(Scanner sc) throws IOException {
+		while(true) {
+			try {
+				int userInput =  Integer.parseInt(sc.next());
+				switch (userInput) {
+				case 0:return true;
+				case 1:return true;
+				case 2:return true;
+				case 3:return true;
+				case 4:{
+					// first we should display detail informations
+					System.out.println("\ny -- reserve, n -- go back to the list");
+					// not finished yet
+					return true;
+				}
+				case 5:return true;
+				default:{
+					System.out.println("\nPlease input number from 0-5, try again now!");
+				}
+				}
+			} catch (Exception e) {
+				System.out.println("\\nPlease input number from 0-5, try again now!");
+				continue;
+			}
+		}
+	}
+	
+	/**
+	 * Ask the user to input a number representing what they want to do next 
+	 * 
+	 * @param nothing
+	 */
+	private static void askForOperation() {
+		System.out.println("\nChoose your operation by input a number below:");
+		System.out.println("0 for sort in price");
+		System.out.println("1 for sort in total time");
+		System.out.println("2 for sort in departure time");
+		System.out.println("3 for sort in arrival time");
+		System.out.println("4 for checking trip details");
+		System.out.println("5 for restart a new search\n");
 	}
 	
 	private static void printBOSFlights() {
