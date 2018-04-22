@@ -59,7 +59,7 @@ public class Flight {
 		return this.firstClassSeating;
 	}
 	public void setFirstClassSeating(Seats fSeating){
-		this.coachSeating = fSeating;
+		this.firstClassSeating = fSeating;
 	}
 	
 	public Airplane getAirplane(){

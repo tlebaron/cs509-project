@@ -45,7 +45,7 @@ public class SearchTripByArrival {
 			Calendar date = secondFlight.getDepartureTimeGMT();
 			Flights thirdLegCandidateFlights = searchArrivingFlightsOn(teamName, arrivalAirport, date);
 			for (Flight f : thirdLegCandidateFlights) {
-				if (isValidConnection(f, secondFlight) && f.departureAirport.code().equals(this.retailCustomerPreferences.departureAirport().code())) {
+				if (isValidConnection(f, secondFlight) && f.getDepartureAirport().code().equals(this.retailCustomerPreferences.departureAirport().code())) {
 					Trip t = new Trip();
 					t.addFlight(trip.getFlight(0));
 					t.addFlight(trip.getFlight(1));
@@ -60,7 +60,7 @@ public class SearchTripByArrival {
 	private Trips findTwoLegTrips(Trips secondLegPossibleTrips) {
 		Trips finalTrips = new Trips();
 		for (Trip t : secondLegPossibleTrips) {
-			if (t.getFlight(0).departureAirport.code().equals(this.retailCustomerPreferences.departureAirport().code())) {
+			if (t.getFlight(0).getDepartureAirport().code().equals(this.retailCustomerPreferences.departureAirport().code())) {
 				finalTrips.add(t);
 			}
 		}
@@ -86,11 +86,11 @@ public class SearchTripByArrival {
 	}
 	
 	private boolean isValidConnection(Flight firstFlight, Flight secondFlight) {
-		boolean ret = firstFlight.arrivalAirport.code().equals(secondFlight.departureAirport.code());
+		boolean ret = firstFlight.getArrivalAirport().code().equals(secondFlight.getArrivalAirport().code());
 		long diff = secondFlight.getDepartureTimeGMT().getTimeInMillis() - firstFlight.getArrivalTimeGMT().getTimeInMillis();
 		diff = diff / 60000;
 		ret = ret && diff <= 180 && diff >= 30;
-		ret = ret && !firstFlight.departureAirport.code().equals(secondFlight.arrivalAirport.code());
+		ret = ret && !firstFlight.getDepartureAirport().code().equals(secondFlight.getArrivalAirport().code());
 		return ret;
 	}
 
