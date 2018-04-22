@@ -131,4 +131,9 @@ public class Trip {
 		
 		return availableSeats;
 	}
+
+	public void setReturnTrip(Trip returnSelectedTrip) {
+		// TODO Auto-generated method stub
+		this.followingTrip = returnSelectedTrip;
+	}
 }
