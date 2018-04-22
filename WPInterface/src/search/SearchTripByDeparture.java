@@ -12,19 +12,23 @@ import trip.Trip;
 import trip.Trips;
 
 public class SearchTripByDeparture {
-	RetailCustomerPreferences retailCustomerPreferences; 
+	Airport departureAirport;
+	Airport arrivalAirport;
+	Calendar date;
 	Airports airports; 
 	
-	public SearchTripByDeparture(RetailCustomerPreferences customerPreferences, Airports airports) {
-		this.retailCustomerPreferences = customerPreferences;
+	public SearchTripByDeparture(Airport departureAirport, Airport arrivalAirport, Calendar date, Airports airports) {
+		this.departureAirport = departureAirport;
+		this.arrivalAirport = arrivalAirport;
+		this.date = date;
 		this.airports = airports;
 	}
 	
-	Trips searchTripsByDepartureAirport(String teamName, Calendar departureDate) {
+	Trips searchTripsByDepartureAirport(String teamName) {
 		// TODO Auto-generated method stub
-		Flights firstLegFlights = searchFirstLegFlights(teamName, departureDate);
+		Flights firstLegFlights = searchFirstLegFlights(teamName, this.date);
 		//System.out.println("First leg flights: " + firstLegFlights.size());
-		Trips collectOneLeg = findOneLegTrips(firstLegFlights, this.retailCustomerPreferences.departureAirport(), this.retailCustomerPreferences.arrivalAirport());
+		Trips collectOneLeg = findOneLegTrips(firstLegFlights, this.departureAirport, this.arrivalAirport);
 		System.out.println("First leg trips: " + collectOneLeg.size());
 		Trips secondLegPossibleTrips = searchSecondLegTrips(teamName, firstLegFlights);
 		//System.out.println("second leg poss trips: " + secondLegPossibleTrips.size());
@@ -47,7 +51,7 @@ public class SearchTripByDeparture {
 			Calendar date = secondFlight.getArrivalTimeGMT();
 			Flights thirdLegCandidateFlights = searchDepartingFlightsOn(teamName, arrivalAirport, date);
 			for (Flight f : thirdLegCandidateFlights) {
-				if (isValidConnection(secondFlight, f) && f.getArrivalAirport().code().equals(this.retailCustomerPreferences.arrivalAirport().code())) {
+				if (isValidConnection(secondFlight, f) && f.getArrivalAirport().code().equals(this.arrivalAirport.code())) {
 					Trip t = new Trip();
 					t.addFlight(trip.getFlight(0));
 					t.addFlight(trip.getFlight(1));
@@ -62,7 +66,7 @@ public class SearchTripByDeparture {
 	private Trips findTwoLegTrips(Trips secondLegPossibleTrips) {
 		Trips finalTrips = new Trips();
 		for (Trip t : secondLegPossibleTrips) {
-			if (t.getFlight(1).getArrivalAirport().code().equals(this.retailCustomerPreferences.arrivalAirport().code())) {
+			if (t.getFlight(1).getArrivalAirport().code().equals(this.arrivalAirport.code())) {
 				finalTrips.add(t);
 			}
 		}
@@ -97,7 +101,7 @@ public class SearchTripByDeparture {
 	}
 
 	private Flights searchFirstLegFlights(String teamName, Calendar departureDate) {
-		return searchDepartingFlightsOn(teamName, this.retailCustomerPreferences.departureAirport(), departureDate);
+		return searchDepartingFlightsOn(teamName, this.departureAirport, departureDate);
 	}
 	
 	private Trips findOneLegTrips(Flights firstLegFlights, Airport departureAirport, Airport arrivalAirport) {

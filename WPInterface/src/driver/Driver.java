@@ -19,6 +19,7 @@ import preferences.RetailCustomerPreferences;
 import search.SearchTrip;
 import timeconversion.GMTConversionInterface;
 import trip.Trip;
+import trip.TripType;
 import trip.Trips;
 import reservation.reserve;
 
@@ -47,10 +48,11 @@ public class Driver {
 		initializeSystem();
 		//printBOSFlights();
 		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports);
-		Trips trips = searchTrip.search(teamName);
+		Trips trips = searchTrip.searchOnward(teamName);
 		System.out.println("Size of trips: " + trips.size());
-		for (Trip t : trips) {
-			System.out.println(t.toString());
+		trips.displayTrips();
+		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
+			searchTrip.searchReturn(teamName);
 		}
 		//reserveSeat();
 	}
