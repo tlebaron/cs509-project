@@ -60,7 +60,7 @@ public class Driver {
 		Calendar departureDate = Calendar.getInstance();
 		departureDate.set(2018,5,12);
 		System.out.println("Date : "+departureDate.get(1)+"_"+departureDate.get(2)+"_"+departureDate.get(5));
-		Flights flights = ServerInterface.INSTANCE.getFlights("BOS", departureDate, teamName);
+		Flights flights = ServerInterface.INSTANCE.getDepartingFlights("BOS", departureDate, teamName);
 		for (Flight flight : flights){
 			System.out.println(flight.toString()); 
 		}
