@@ -1,6 +1,8 @@
 package trip;
 
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -77,6 +79,8 @@ public class Trips extends ArrayList<Trip> {
 		System.out.println("ID \t|\t Departure \t|\t Arrival \t|\t "
 				+ "Duration \t|\t Price \t|\t Dearture Time \t|\t Arrival Time  \t|\t "
 				+ "Seats \t|");
+		System.out.println("---------------------------------------------------------------------------------------------------"
+				+ "-------------------------------------------------");
 		
 		HashMap<Integer, Trip> hashList = createList(maxStepOver);
 		
@@ -92,7 +96,9 @@ public class Trips extends ArrayList<Trip> {
 			sb.append(trip.getDepartureAirportCode() + " \t\t|\t ");
 			sb.append(trip.getArrivalAirportCode() + " \t\t|\t ");
 			sb.append(trip.getDurationFormat() + " \t\t|\t ");
-			sb.append(trip.getPrice(preferences.getTripClass()) + " \t|\t ");
+			DecimalFormat df = new DecimalFormat("##.##");
+			df.setRoundingMode(RoundingMode.DOWN);
+			sb.append(df.format(trip.getPrice(preferences.getTripClass())) + " \t|\t ");
 			sb.append(trip.getTimeFormat(trip.getDepartureTimeLocal()) + " |\t ");
 			sb.append(trip.getTimeFormat(trip.getArrivalTimeLocal()) + " |\t ");
 			sb.append(trip.getAvailableSeats(preferences.getTripClass()) + " \t|");

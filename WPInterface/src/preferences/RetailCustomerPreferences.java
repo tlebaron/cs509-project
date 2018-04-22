@@ -50,6 +50,10 @@ public class RetailCustomerPreferences {
 		return searchDate;
 	}
 	
+	public Calendar searchReturnDate() {
+		return returnDate;
+	}
+	
 	public DateType searchDateType() {
 		return searchDateType;
 	}

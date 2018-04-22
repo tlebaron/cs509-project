@@ -16,7 +16,6 @@ import trip.Trips;
 
 public class SearchTrip {
 	RetailCustomerPreferences retailCustomerPreferences;
-	Trips onwardTripList;
 	Airports airports;
 	
 	public SearchTrip(RetailCustomerPreferences retailCustomerPreferences, Airports airports) {
@@ -24,17 +23,31 @@ public class SearchTrip {
 		this.airports = airports;
 	}
 	
-	public Trips search(String teamName) {
+	public Trips searchOnward(String teamName) {
 		Trips trips;
 		Calendar date = retailCustomerPreferences.searchDate();
 		if(retailCustomerPreferences.searchDateType() == DateType.ARRIVAL) {
-			SearchTripByArrival search = new SearchTripByArrival(this.retailCustomerPreferences, this.airports);
-			trips = search.searchTripsByArrivalAirport(teamName, date);
+			SearchTripByArrival search = new SearchTripByArrival(retailCustomerPreferences.departureAirport(), retailCustomerPreferences.arrivalAirport(), date, this.airports);
+			trips = search.searchTripsByArrivalAirport(teamName);
 		} else {
-			SearchTripByDeparture search = new SearchTripByDeparture(this.retailCustomerPreferences, this.airports);
-			trips = search.searchTripsByDepartureAirport(teamName, date);
+			SearchTripByDeparture search = new SearchTripByDeparture(retailCustomerPreferences.departureAirport(), retailCustomerPreferences.arrivalAirport(), date, this.airports);
+			trips = search.searchTripsByDepartureAirport(teamName);
 		}
 		
 		return trips;
   }
+
+	public Trips searchReturn(String teamName) {
+		// TODO Auto-generated method stub
+		Trips trips;
+		if(retailCustomerPreferences.searchDateType() == DateType.ARRIVAL) {
+			SearchTripByArrival search = new SearchTripByArrival(retailCustomerPreferences.arrivalAirport(), retailCustomerPreferences.departureAirport(), retailCustomerPreferences.searchReturnDate(), this.airports);
+			trips = search.searchTripsByArrivalAirport(teamName);
+		} else {
+			SearchTripByDeparture search = new SearchTripByDeparture(retailCustomerPreferences.arrivalAirport(), retailCustomerPreferences.departureAirport(), retailCustomerPreferences.searchReturnDate(), this.airports);
+			trips = search.searchTripsByDepartureAirport(teamName);
+		}
+		
+		return trips;
+	}
 }

@@ -50,13 +50,11 @@ public class Driver {
 		initializeSystem();
 		//printBOSFlights();
 		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports);
-		Trips trips = searchTrip.search(teamName);
+		Trips trips = searchTrip.searchOnward(teamName);
 		System.out.println("Size of trips: " + trips.size());
-		for (Trip t : trips) {
-			int count = 0;
-			System.out.println("index = "+count+" :");
-			System.out.println(t.toString());
-			count ++;
+		trips.displayTrips();
+		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
+			searchTrip.searchReturn(teamName);
 		}
 		askForOperation();
 		Scanner sc = new Scanner(System.in);
