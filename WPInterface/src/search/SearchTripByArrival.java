@@ -2,6 +2,7 @@ package search;
 
 import java.util.Calendar;
 
+import airplane.Airplanes;
 import airport.Airport;
 import airport.Airports;
 import dao.ServerInterface;
@@ -14,15 +15,17 @@ import trip.Trips;
 public class SearchTripByArrival {
 	
 	Airports airports;
+	Airplanes airplanes;
 	Airport departureAirport;
 	Airport arrivalAirport;
 	Calendar date;
 	
-	public SearchTripByArrival(Airport departureAirport, Airport arrivalAirport, Calendar date, Airports airports) {
+	public SearchTripByArrival(Airport departureAirport, Airport arrivalAirport, Calendar date, Airports airports, Airplanes airplanes) {
 		this.departureAirport = departureAirport;
 		this.arrivalAirport = arrivalAirport;
 		this.date = date;
 		this.airports = airports;
+		this.airplanes = airplanes;
 	}
 	
 	Trips searchTripsByDepartureAirport(String teamName, Calendar departureDate) {
@@ -138,7 +141,7 @@ public class SearchTripByArrival {
 	}
 	
 	public Flights searchArrivingFlightsOn(String teamName, Airport arrivalAirport, Calendar arrivalDate) {
-		Flights flights = ServerInterface.INSTANCE.getArrivingFlights(arrivalAirport.code(), arrivalDate, teamName, this.airports);
+		Flights flights = ServerInterface.INSTANCE.getArrivingFlights(arrivalAirport.code(), arrivalDate, teamName, this.airports, this.airplanes);
 		return flights;
 	}
 

@@ -49,7 +49,7 @@ public class Driver {
 	public static void main(String[] args) {
 		initializeSystem();
 		//printBOSFlights();
-		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports);
+		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports, airplanes);
 		Trips onwardTrips = searchTrip.searchOnward(teamName);
 		System.out.println("Found " + onwardTrips.size() + " onward trips.");
 		
@@ -99,15 +99,16 @@ public class Driver {
 	}
 
 	private static int handleOption(Trips trips, int userOption) {
-		// TODO Auto-generated method stub
 		switch(userOption) {
-		case 1: // sort by price
+		case 0: // sort by price
 			break;
-		case 2:  // sort by total time
+		case 1:  // sort by total time
 			break;
-		case 3: // sort by departure time
+		case 2: // sort by departure time
 			break;
-		case 4: // sort by arrival time
+		case 3: // sort by arrival time
+			break;
+		case 4: //start a new search
 			break;
 		case 5: // select trip
 			return 5;
@@ -174,7 +175,7 @@ public class Driver {
 		//System.out.println("\nPrint airplanes");
 		//System.out.println("Manu\tModel\t#coach\t#1stclass");
 		// try print out airplanes to check if we are doing everything right
-		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
+		airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 	}
 	
 	private static void reserveSeat() {

@@ -25,6 +25,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import airplane.Airplane;
+import airplane.Airplanes;
 import airport.Airport;
 import airport.Airports;
 import flight.Flight;
@@ -55,7 +56,7 @@ public class DaoFlights {
 	 * @pre the xmlFlights string adheres to the format specified by the server API
 	 * @post the [possibly empty] set of Flights in the XML string are added to collection
 	 */
-	public static Flights addAll (String xmlFlights, Airports airports) throws NullPointerException {
+	public static Flights addAll (String xmlFlights, Airports airports, Airplanes airplanes) throws NullPointerException {
 		Flights Flights = new Flights();
 		
 		// Load the XML string into a DOM tree for ease of processing
@@ -65,7 +66,7 @@ public class DaoFlights {
 		
 		for (int i = 0; i < nodesFlights.getLength(); i++) {
 			Element elementFlight = (Element) nodesFlights.item(i);
-			Flight Flight = buildFlight (elementFlight, airports);
+			Flight Flight = buildFlight (elementFlight, airports, airplanes);
 			
 			//if (Flight.isValid()) {
 				Flights.add(Flight);
@@ -149,7 +150,7 @@ public class DaoFlights {
 	 * 
 	 * @pre nodeFlight is of format specified by CS509 server API
 	 */
-	static private Flight buildFlight (Node nodeFlight, Airports airports) {
+	static private Flight buildFlight (Node nodeFlight, Airports airports, Airplanes airplanes) {
 		/**
 		 * Instantiate an empty Flight object
 		 */
@@ -176,8 +177,7 @@ public class DaoFlights {
 		
 		// The Flight element has attributes of Manufacturer and model
 		Element elementFlight = (Element) nodeFlight;
-		airplane = new Airplane();
-		airplane.model(elementFlight.getAttributeNode("Airplane").getValue());
+		String airplaneCode = elementFlight.getAttributeNode("Airplane").getValue();
 		flightTime = Integer.parseInt(elementFlight.getAttributeNode("FlightTime").getValue());
 		flightNumber = Integer.parseInt(elementFlight.getAttributeNode("Number").getValue());
 		
@@ -247,7 +247,7 @@ public class DaoFlights {
 		/**
 		 * Update the Flight object with values from XML node
 		 */
-		Flight.setAirplane(airplane);
+		Flight.setAirplane(findAirplane(airplaneCode, airplanes));
 		Flight.setFlightTime(flightTime);
 		Flight.setFlightNumber(flightNumber);
 		Flight.setDepartureAirport(findAirport(departureAirportCode, airports));
@@ -258,6 +258,17 @@ public class DaoFlights {
 		Flight.setCoachSeating(coachSeat);
 		
 		return Flight;
+	}
+
+	private static Airplane findAirplane(String airplaneCode, Airplanes airplanes) {
+		// TODO Auto-generated method stub
+		for (Airplane a : airplanes) {
+			if(airplaneCode.equals(a.model())) {
+				return a;
+			}
+		}
+		System.out.println("HERE");
+		return null;
 	}
 
 	private static Airport findAirport(String airportCode, Airports airports) {
