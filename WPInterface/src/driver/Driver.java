@@ -50,51 +50,85 @@ public class Driver {
 		initializeSystem();
 		//printBOSFlights();
 		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports);
-		Trips trips = searchTrip.searchOnward(teamName);
-		System.out.println("Size of trips: " + trips.size());
-		trips.displayTrips();
-		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
-			searchTrip.searchReturn(teamName);
+		Trips onwardTrips = searchTrip.searchOnward(teamName);
+		System.out.println("Found " + onwardTrips.size() + " onward trips.");
+		
+		int userOption = 0;
+		while (userOption != 5) {
+			onwardTrips.displayTrips();
+			showOptions();
+			userOption = getOption();
+			handleOption(onwardTrips, userOption);
 		}
-		askForOperation();
-		Scanner sc = new Scanner(System.in);
-		try {
-			if(OperationJudgement(sc)) {
-				System.out.println("\nEverything done now! Wish you a good day!");
-			}else {
-				System.out.println("Something is not functioning well. System shutting down.");
+		Trip onwardSelectedTrip = getUserTrip(onwardTrips);
+		Trip returnSelectedTrip = null;
+		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
+			Trips returnTrips = searchTrip.searchReturn(teamName);
+			System.out.println("Found " + returnTrips.size() + " return trips.");
+			userOption = 0;
+			while (userOption != 5) {
+				returnTrips.displayTrips();
+				showOptions();
+				userOption = getOption();
+				handleOption(returnTrips, userOption);
 			}
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+			returnSelectedTrip = getUserTrip(returnTrips);
+		}
+		
+		onwardSelectedTrip.setReturnTrip(returnSelectedTrip);
+		showSelectedTripDetails(onwardSelectedTrip, returnSelectedTrip);
 		//reserveSeat();
 	}
-	private static Boolean OperationJudgement(Scanner sc) throws IOException {
-		while(true) {
+	
+	private static void showSelectedTripDetails(Trip onwardSelectedTrip, Trip returnSelectedTrip) {
+		// TODO Auto-generated method stub
+		System.out.println("Onward Trip Details: " + onwardSelectedTrip.toString());
+		if(returnSelectedTrip != null) {
+			System.out.println("Return Trip Details: " + returnSelectedTrip.toString());
+		}
+	}
+
+	private static Trip getUserTrip(Trips trips) {
+		// TODO Auto-generated method stub
+		System.out.println("Which trip do you want to pick?");
+		Scanner sc = new Scanner(System.in);
+		int option = -1;
+		option =  Integer.parseInt(sc.next());
+		Trip userTrip = trips.getTripForNum(option);
+		return userTrip;
+	}
+
+	private static int handleOption(Trips trips, int userOption) {
+		// TODO Auto-generated method stub
+		switch(userOption) {
+		case 1: // sort by price
+			break;
+		case 2:  // sort by total time
+			break;
+		case 3: // sort by departure time
+			break;
+		case 4: // sort by arrival time
+			break;
+		case 5: // select trip
+			return 5;
+		}
+		return 0;
+	}
+
+	private static int getOption() {
+		System.out.println("What is your option?");
+		Scanner sc = new Scanner(System.in);
+		int option = -1;
+		while(option > 5 || option < 0) {
 			try {
-				int userInput =  Integer.parseInt(sc.next());
-				switch (userInput) {
-				case 0:return true;
-				case 1:return true;
-				case 2:return true;
-				case 3:return true;
-				case 4:{
-					// first we should display detail informations
-					System.out.println("\ny -- reserve, n -- go back to the list");
-					// not finished yet
-					return true;
-				}
-				case 5:return true;
-				default:{
-					System.out.println("\nPlease input number from 0-5, try again now!");
-				}
-				}
+				option =  Integer.parseInt(sc.next());
 			} catch (Exception e) {
-				System.out.println("\\nPlease input number from 0-5, try again now!");
+				System.out.println("The option you entered is not valid, please try again.");
+				System.out.println("What is your option?");
 				continue;
 			}
 		}
+		return option;
 	}
 	
 	/**
@@ -102,25 +136,14 @@ public class Driver {
 	 * 
 	 * @param nothing
 	 */
-	private static void askForOperation() {
+	private static void showOptions() {
 		System.out.println("\nChoose your operation by input a number below:");
-		System.out.println("0 for sort in price");
-		System.out.println("1 for sort in total time");
-		System.out.println("2 for sort in departure time");
-		System.out.println("3 for sort in arrival time");
-		System.out.println("4 for checking trip details");
-		System.out.println("5 for restart a new search\n");
-	}
-	
-	private static void printBOSFlights() {
-		System.out.println("\nprint flights leaving BOS on 2018 May 12");
-		Calendar departureDate = Calendar.getInstance();
-		departureDate.set(2018,5,12);
-		System.out.println("Date : "+departureDate.get(1)+"_"+departureDate.get(2)+"_"+departureDate.get(5));
-		Flights flights = ServerInterface.INSTANCE.getDepartingFlights("BOS", departureDate, teamName, airports);
-		for (Flight flight : flights){
-			System.out.println(flight.toString()); 
-		}
+		System.out.println("0 Sort By Price");
+		System.out.println("1 for Sort By Total Time");
+		System.out.println("2 for Sort By Departure Time");
+		System.out.println("3 for Sort By Arrival Time");
+		System.out.println("4 for Starting A New Search\n");
+		System.out.println("5 to Choose Trip");
 	}
 	
 	private static void initializeSystem() {
@@ -141,7 +164,8 @@ public class Driver {
 		GMTConversionInterface gmtInterface;
 		for(Airport a : airports) {
 			gmtInterface = new GMTConversionInterface();
-			String timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
+			//String timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
+			String timeZone = "GMT";
 			a.setTimeZoneID(timeZone);
 		}
 	}
