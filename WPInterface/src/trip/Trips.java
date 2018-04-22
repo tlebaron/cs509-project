@@ -57,7 +57,7 @@ public class Trips extends ArrayList<Trip> {
 		while(true) {
 			try {
 				int maxSO = Integer.parseInt(sc.next());
-				if (maxSO < 3 || maxSO > -1) {
+				if (maxSO < 3 && maxSO > -1) {
 					maxStepOver = maxSO;
 					break;
 					}
