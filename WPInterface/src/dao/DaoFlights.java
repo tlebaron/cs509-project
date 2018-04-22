@@ -177,7 +177,7 @@ public class DaoFlights {
 		// The Flight element has attributes of Manufacturer and model
 		Element elementFlight = (Element) nodeFlight;
 		airplane = new Airplane();
-		airplane.model = elementFlight.getAttributeNode("Airplane").getValue();
+		airplane.model(elementFlight.getAttributeNode("Airplane").getValue());
 		flightTime = Integer.parseInt(elementFlight.getAttributeNode("FlightTime").getValue());
 		flightNumber = Integer.parseInt(elementFlight.getAttributeNode("Number").getValue());
 		

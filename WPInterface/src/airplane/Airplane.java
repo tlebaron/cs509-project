@@ -21,10 +21,10 @@ public class Airplane {
 	/**
 	 * Airplane attributes as defined by the CS509 server interface XML
 	 */
-	public String manufacturer;
-	public String model;
-	public Seats coachSeats;
-	public Seats firstClassSeats;
+	private String manufacturer;
+	private String model;
+	private Seats coachSeats;
+	private Seats firstClassSeats;
 	
 	/**
 	 * Default constructor
