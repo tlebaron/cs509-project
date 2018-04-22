@@ -88,7 +88,6 @@ public class Flight {
 	
 	public Calendar getDepartureTimeLocal(){
 		Calendar timeCalendar = (Calendar) departureTimeGMT.clone();
-		System.out.println("timezone: " + this.departureAirport.getTimeZoneID());
 		timeCalendar.setTimeZone(TimeZone.getTimeZone(this.departureAirport.getTimeZoneID()));
 		return timeCalendar;
 	}

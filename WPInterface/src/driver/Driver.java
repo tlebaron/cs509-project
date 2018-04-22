@@ -69,7 +69,7 @@ public class Driver {
 	private static void initializeSystem() {
 		initializeAirports();
 		retailCustomerPreferences.getRetailCustomerPreferences(airports);
-		retailCustomerPreferences.printRetailCustomerPreferences();
+		//retailCustomerPreferences.printRetailCustomerPreferences();
 		initializeTimeOffsets();
 		initializeAirplanes();
 	}
@@ -78,10 +78,6 @@ public class Driver {
 		// Try to get a list of airports
 		airports = ServerInterface.INSTANCE.getAirports(teamName);
 		Collections.sort(airports);
-		
-		for (Airport airport : airports) {
-			System.out.println(airport.toString());
-		}
 	}
 	
 	private static void initializeTimeOffsets() {
@@ -89,19 +85,15 @@ public class Driver {
 		for(Airport a : airports) {
 			gmtInterface = new GMTConversionInterface();
 			String timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
-			System.out.println(timeZone);
 			a.setTimeZoneID(timeZone);
 		}
 	}
 	
 	private static void initializeAirplanes() {
-		System.out.println("\nPrint airplanes");
-		System.out.println("Manu\tModel\t#coach\t#1stclass");
+		//System.out.println("\nPrint airplanes");
+		//System.out.println("Manu\tModel\t#coach\t#1stclass");
 		// try print out airplanes to check if we are doing everything right
 		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
-		for (Airplane airplane : airplanes) {
-			System.out.println(airplane.toString());
-		}
 	}
 	
 	private static void reserveSeat() {
