@@ -20,6 +20,7 @@ import flight.Flights;
 import preferences.RetailCustomerPreferences;
 import search.SearchTrip;
 import timeconversion.GMTConversionInterface;
+import trip.SortTrips;
 import trip.Trip;
 import trip.TripType;
 import trip.Trips;
@@ -49,7 +50,11 @@ public class Driver {
 	public static void main(String[] args) {
 		initializeSystem();
 		//printBOSFlights();
+		
+		//Get retail customer preferences
 		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports, airplanes);
+		
+		
 		Trips onwardTrips = searchTrip.searchOnward(teamName);
 		System.out.println("Found " + onwardTrips.size() + " onward trips.");
 		
@@ -60,6 +65,7 @@ public class Driver {
 			userOption = getOption();
 			handleOption(onwardTrips, userOption);
 		}
+		
 		Trip onwardSelectedTrip = getUserTrip(onwardTrips);
 		Trip returnSelectedTrip = null;
 		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
@@ -77,13 +83,7 @@ public class Driver {
 		
 		onwardSelectedTrip.setReturnTrip(returnSelectedTrip);
 		showSelectedTripDetails(onwardSelectedTrip, returnSelectedTrip);
-		// now reserveSeats for the selected flights
-		System.out.println("\nBooking flights for onward selected trip...");
-		reserveSeat(onwardSelectedTrip.getFlights());
-		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
-			System.out.println("\nBooking flights for return selected trip...");
-			reserveSeat(onwardSelectedTrip.getfollowingTrip().getFlights());
-		}
+		//reserveSeat();
 	}
 	
 	private static void showSelectedTripDetails(Trip onwardSelectedTrip, Trip returnSelectedTrip) {
@@ -105,14 +105,19 @@ public class Driver {
 	}
 
 	private static int handleOption(Trips trips, int userOption) {
+		SortTrips sorter = new SortTrips();
 		switch(userOption) {
 		case 0: // sort by price
+			sorter.sortByPrice(trips, retailCustomerPreferences.tripClass);
 			break;
 		case 1:  // sort by total time
+			sorter.sortByTravelTime(trips);
 			break;
 		case 2: // sort by departure time
+			sorter.sortByDepartureDate(trips);
 			break;
 		case 3: // sort by arrival time
+			sorter.sortByArrivalDate(trips);
 			break;
 		case 4: //start a new search
 			break;
@@ -184,9 +189,13 @@ public class Driver {
 		airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 	}
 	
-	private static void reserveSeat(Flights myFlights) {
+	private static void reserveSeat() {
 		System.out.println("\nReserve seats and return result(s)");
 //		ServerInterface.INSTANCE.reserve_ticket(teamName, xmlFlights);
+		Flight myFlight = new Flight();
+		myFlight.setFlightNumber(3809);
+		Flights myFlights = new Flights();
+		myFlights.add(myFlight);
 		String seattype = new String("Coach");// FirstClass
 		
 		reserve nowreserve = new reserve(myFlights);
