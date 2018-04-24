@@ -60,6 +60,8 @@ public class Driver {
 		
 		//wait until the user select to display a trip details
 		int reserve = 0;
+		Trip onwardSelectedTrip = null;
+		Trip returnSelectedTrip = null;
 		do{
 			int userOption = 0;
 			while (userOption != 5) {
@@ -69,8 +71,8 @@ public class Driver {
 				handleOption(onwardTrips, userOption);
 			}
 			
-			Trip onwardSelectedTrip = getUserTrip(onwardTrips);
-			Trip returnSelectedTrip = null;
+			onwardSelectedTrip = getUserTrip(onwardTrips);
+			returnSelectedTrip = null;
 			if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
 				Trips returnTrips = searchTrip.searchReturn(teamName);
 				System.out.println("Found " + returnTrips.size() + " return trips.");
@@ -95,6 +97,11 @@ public class Driver {
 		} while (reserve == 0);
 		System.out.println("RESERVATION");
 		//reserveSeat();
+		reserveSeat(onwardSelectedTrip.getFlights());
+		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
+			System.out.println("\nBooking flights for return selected trip...");
+		 	reserveSeat(onwardSelectedTrip.getfollowingTrip().getFlights());
+		}
 	}
 	
 	private static void showSelectedTripDetails(Trip onwardSelectedTrip, Trip returnSelectedTrip) {
@@ -200,13 +207,10 @@ public class Driver {
 		airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 	}
 	
-	private static void reserveSeat() {
+	private static void reserveSeat(Flights myFlights) {
 		System.out.println("\nReserve seats and return result(s)");
 //		ServerInterface.INSTANCE.reserve_ticket(teamName, xmlFlights);
-		Flight myFlight = new Flight();
-		myFlight.setFlightNumber(3809);
-		Flights myFlights = new Flights();
-		myFlights.add(myFlight);
+
 		String seattype = new String("Coach");// FirstClass
 		
 		reserve nowreserve = new reserve(myFlights);

@@ -335,9 +335,13 @@ public enum ServerInterface {
 				in.close();
 
 				System.out.println(response.toString());
+				if (responseCode >= HttpURLConnection.HTTP_ACCEPTED) {
+					return false;
+				}
 			}
 			else {
 				System.out.println("\nReservation Failed! Please try again later.");
+				return false;
 			}
 		}
 		catch (IOException ex) {
