@@ -335,7 +335,8 @@ public enum ServerInterface {
 				in.close();
 
 				System.out.println(response.toString());
-				if (responseCode >= HttpURLConnection.HTTP_ACCEPTED) {
+				if (responseCode > HttpURLConnection.HTTP_ACCEPTED) {
+					System.out.println("\nbad response code " + responseCode);
 					return false;
 				}
 			}
@@ -346,10 +347,12 @@ public enum ServerInterface {
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
+			System.out.println("\nIOException");
 			return false;
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
+			System.out.println("\nException.");
 			return false;
 		}
 		return true;

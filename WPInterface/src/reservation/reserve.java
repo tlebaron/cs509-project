@@ -151,10 +151,12 @@ public class reserve {
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 			mSI.unlock(teamName);
+			System.out.println("parser failure");
 			return false;
 		} catch (TransformerException e) {
 			e.printStackTrace();
 			mSI.unlock(teamName);
+			System.out.println("TransformerException");
 			return false;
 		}
 	}
