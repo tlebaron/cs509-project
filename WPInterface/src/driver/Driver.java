@@ -187,8 +187,8 @@ public class Driver {
 		GMTConversionInterface gmtInterface;
 		for(Airport a : airports) {
 			gmtInterface = new GMTConversionInterface();
-			//String timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
-			String timeZone = "GMT";
+			String timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
+			//String timeZone = "GMT";
 			a.setTimeZoneID(timeZone);
 		}
 	}
