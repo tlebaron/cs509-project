@@ -58,31 +58,42 @@ public class Driver {
 		Trips onwardTrips = searchTrip.searchOnward(teamName);
 		System.out.println("Found " + onwardTrips.size() + " onward trips.");
 		
-		int userOption = 0;
-		while (userOption != 5) {
-			onwardTrips.displayTrips();
-			showOptions();
-			userOption = getOption();
-			handleOption(onwardTrips, userOption);
-		}
-		
-		Trip onwardSelectedTrip = getUserTrip(onwardTrips);
-		Trip returnSelectedTrip = null;
-		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
-			Trips returnTrips = searchTrip.searchReturn(teamName);
-			System.out.println("Found " + returnTrips.size() + " return trips.");
-			userOption = 0;
+		//wait until the user select to display a trip details
+		int reserve = 0;
+		do{
+			int userOption = 0;
 			while (userOption != 5) {
-				returnTrips.displayTrips();
+				onwardTrips.displayTrips();
 				showOptions();
 				userOption = getOption();
-				handleOption(returnTrips, userOption);
+				handleOption(onwardTrips, userOption);
 			}
-			returnSelectedTrip = getUserTrip(returnTrips);
-		}
-		
-		onwardSelectedTrip.setReturnTrip(returnSelectedTrip);
-		showSelectedTripDetails(onwardSelectedTrip, returnSelectedTrip);
+			
+			Trip onwardSelectedTrip = getUserTrip(onwardTrips);
+			Trip returnSelectedTrip = null;
+			if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
+				Trips returnTrips = searchTrip.searchReturn(teamName);
+				System.out.println("Found " + returnTrips.size() + " return trips.");
+				userOption = 0;
+				while (userOption != 5) {
+					returnTrips.displayTrips();
+					showOptions();
+					userOption = getOption();
+					handleOption(returnTrips, userOption);
+				}
+				returnSelectedTrip = getUserTrip(returnTrips);
+			}
+			
+			onwardSelectedTrip.setReturnTrip(returnSelectedTrip);
+			showSelectedTripDetails(onwardSelectedTrip, returnSelectedTrip);
+			
+			do {
+				System.out.println("Do you want to reserve this trip? (1 - Yes, 0 - No)");
+				Scanner sc = new Scanner(System.in);
+				reserve = Integer.parseInt(sc.next());
+			} while (reserve != 0 && reserve != 1);
+		} while (reserve == 0);
+		System.out.println("RESERVATION");
 		//reserveSeat();
 	}
 	

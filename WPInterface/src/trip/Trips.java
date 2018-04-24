@@ -82,7 +82,7 @@ public class Trips extends ArrayList<Trip> {
 		
 		System.out.println("Available trips:" + this.size());
 		System.out.println("ID \t|\t Departure \t|\t Arrival \t|\t "
-				+ "Duration \t|\t Price \t|\t Dearture Time \t|\t Arrival Time  \t|\t "
+				+ "Duration \t|     Price \t|\t Dearture Time \t|\t Arrival Time  \t|\t "
 				+ "Seats \t|");
 		System.out.println("---------------------------------------------------------------------------------------------------"
 				+ "-------------------------------------------------");
@@ -100,7 +100,7 @@ public class Trips extends ArrayList<Trip> {
 			sb.append(mEntry.getKey() + " \t|\t ");
 			sb.append(trip.getDepartureAirportCode() + " \t\t|\t ");
 			sb.append(trip.getArrivalAirportCode() + " \t\t|\t ");
-			sb.append(trip.getDurationFormat() + " \t\t|\t ");
+			sb.append(trip.getDurationFormat() + " \t\t|     ");
 			DecimalFormat df = new DecimalFormat("##.##");
 			df.setRoundingMode(RoundingMode.DOWN);
 			sb.append(df.format(trip.getPrice(preferences.getTripClass())) + " \t|\t ");

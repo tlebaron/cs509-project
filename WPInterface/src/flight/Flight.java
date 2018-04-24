@@ -182,7 +182,7 @@ public class Flight {
 		sb.append("Departure Time (GMT): "+departureTimeGMT.get(Calendar.MONTH)+"/"+departureTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeGMT.get(Calendar.YEAR)+" at "+departureHour+":"+departureMinute + "\n");
 		sb.append("Arrival Time (GMT): "+arrivalTimeGMT.get(Calendar.MONTH)+"/"+arrivalTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeGMT.get(Calendar.YEAR)+" at "+arrivalHour+":" + arrivalMinute + "\n");
 		sb.append("Departure Time (Local): "+departureTimeLocal.get(Calendar.MONTH)+"/"+departureTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeLocal.get(Calendar.YEAR)+" at "+departureTimeLocal.get(Calendar.HOUR)+":"+departureTimeLocal.get(Calendar.MINUTE) + "\n");
-		sb.append("Departure Time (Local): "+arrivalTimeLocal.get(Calendar.MONTH)+"/"+arrivalTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeLocal.get(Calendar.YEAR)+" at "+arrivalTimeLocal.get(Calendar.HOUR)+":"+arrivalTimeLocal.get(Calendar.MINUTE) + "\n");
+		sb.append("Arrival Time (Local): "+arrivalTimeLocal.get(Calendar.MONTH)+"/"+arrivalTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeLocal.get(Calendar.YEAR)+" at "+arrivalTimeLocal.get(Calendar.HOUR)+":"+arrivalTimeLocal.get(Calendar.MINUTE) + "\n");
 		sb.append("----------");
 
 		return sb.toString();
