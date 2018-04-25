@@ -33,7 +33,7 @@ public class SearchTripByArrival {
 		Flights firstLegFlights = searchFirstLegFlights(teamName, departureDate);
 		//System.out.println("First leg flights: " + firstLegFlights.size());
 		Trips collectOneLeg = findOneLegTrips(firstLegFlights, this.departureAirport, this.arrivalAirport);
-		System.out.println("First leg trips: " + collectOneLeg.size());
+		System.out.println("One leg trips: " + collectOneLeg.size());
 		Trips secondLegPossibleTrips = searchSecondLegTrips(teamName, firstLegFlights);
 		//System.out.println("second leg poss trips: " + secondLegPossibleTrips.size());
 		Trips collectTwoLeg = findTwoLegTrips(secondLegPossibleTrips);

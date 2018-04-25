@@ -53,9 +53,15 @@ public class Driver {
 		
 		//Get retail customer preferences
 		SearchTrip searchTrip = new SearchTrip(retailCustomerPreferences, airports, airplanes);
-		
-		
 		Trips onwardTrips = searchTrip.searchOnward(teamName);
+		
+		while (onwardTrips.size() == 0){
+			System.out.println("No trips found for this search. Please make another research");
+			retailCustomerPreferences.getRetailCustomerPreferences(airports);
+			searchTrip = new SearchTrip(retailCustomerPreferences, airports, airplanes);
+			onwardTrips = searchTrip.searchOnward(teamName);
+		}
+		
 		System.out.println("Found " + onwardTrips.size() + " onward trips.");
 		
 		//wait until the user select to display a trip details
@@ -126,16 +132,16 @@ public class Driver {
 		SortTrips sorter = new SortTrips();
 		switch(userOption) {
 		case 0: // sort by price
-			sorter.sortByPrice(trips, retailCustomerPreferences.tripClass);
+			trips = sorter.sortByPrice(trips, retailCustomerPreferences.tripClass);
 			break;
 		case 1:  // sort by total time
-			sorter.sortByTravelTime(trips);
+			trips = sorter.sortByTravelTime(trips);
 			break;
 		case 2: // sort by departure time
-			sorter.sortByDepartureDate(trips);
+			trips = sorter.sortByDepartureDate(trips);
 			break;
 		case 3: // sort by arrival time
-			sorter.sortByArrivalDate(trips);
+			trips = sorter.sortByArrivalDate(trips);
 			break;
 		case 4: //change number of stopovers
 			trips.getNewMaxStepOver();

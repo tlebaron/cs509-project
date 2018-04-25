@@ -5,6 +5,7 @@ import static java.lang.Math.toIntExact;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import flight.Flights;
 import preferences.RetailCustomerPreferences;
@@ -102,7 +103,7 @@ public class Trip {
 	}
 	
 	public String getTimeFormat(long time){
-		DateFormat formater =  DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		DateFormat formater =  DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
 		String date = formater.format(new Date(time));
 		return date;
 	}
