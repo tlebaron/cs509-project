@@ -90,6 +90,7 @@ public class Flight {
 		if (this.departureTimeLocal != null) return this.departureTimeLocal;
 		Calendar timeCalendar = (Calendar) departureTimeGMT.clone();
 		timeCalendar.setTimeZone(TimeZone.getTimeZone(this.departureAirport.getTimeZoneID()));
+		this.departureTimeLocal = timeCalendar;
 		return timeCalendar;
 	}
 	
@@ -97,6 +98,7 @@ public class Flight {
 		if (this.arrivalTimeLocal != null) return this.arrivalTimeLocal;
 		Calendar timeCalendar = (Calendar) arrivalTimeGMT.clone();
 		timeCalendar.setTimeZone(TimeZone.getTimeZone(this.arrivalAirport.getTimeZoneID()));
+		this.arrivalTimeLocal = timeCalendar;
 		return timeCalendar;
 	}
 	
