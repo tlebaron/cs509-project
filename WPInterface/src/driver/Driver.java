@@ -137,7 +137,8 @@ public class Driver {
 		case 3: // sort by arrival time
 			sorter.sortByArrivalDate(trips);
 			break;
-		case 4: //start a new search
+		case 4: //change number of stopovers
+			trips.getNewMaxStepOver();
 			break;
 		case 5: // select trip
 			return 5;
@@ -172,7 +173,7 @@ public class Driver {
 		System.out.println("1 for Sort By Total Time");
 		System.out.println("2 for Sort By Departure Time");
 		System.out.println("3 for Sort By Arrival Time");
-		System.out.println("4 for Starting A New Search\n");
+		System.out.println("4 for change number of stopovers\n");
 		System.out.println("5 to Choose Trip");
 	}
 	
