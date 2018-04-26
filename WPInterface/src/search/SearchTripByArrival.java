@@ -50,7 +50,7 @@ public class SearchTripByArrival {
 	private Trips searchThirdLegTrips(String teamName, Trips secondLegPossibleTrips) {
 		Trips thirdLegTrips = new Trips();
 		for (Trip trip : secondLegPossibleTrips) {
-			Flight secondFlight = trip.getFlight(0);
+			Flight secondFlight = trip.getFlight(1);
 			Airport arrivalAirport = secondFlight.getDepartureAirport();
 			Calendar date = secondFlight.getDepartureTimeGMT();
 			Flights thirdLegCandidateFlights = searchArrivingFlightsOn(teamName, arrivalAirport, date);
