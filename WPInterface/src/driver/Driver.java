@@ -101,7 +101,7 @@ public class Driver {
 				reserve = Integer.parseInt(sc.next());
 			} while (reserve != 0 && reserve != 1);
 		} while (reserve == 0);
-		System.out.println("RESERVATION");
+		//System.out.println("RESERVATION");
 		//reserveSeat();
 		reserveSeat(onwardSelectedTrip.getFlights());
 		if(retailCustomerPreferences.searchTripType() == TripType.ROUNDTRIP) {
@@ -229,7 +229,7 @@ public class Driver {
 	}
 	
 	private static void reserveSeat(Flights myFlights) {
-		System.out.println("\nReserve seats and return result(s)");
+//		System.out.println("\nReserve seats and return result(s)");
 //		ServerInterface.INSTANCE.reserve_ticket(teamName, xmlFlights);
 
 		String seattype = new String("Coach");// FirstClass
