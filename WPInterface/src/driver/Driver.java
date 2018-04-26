@@ -148,6 +148,9 @@ public class Driver {
 			break;
 		case 5: // select trip
 			return 5;
+		default: 
+			System.out.println("The option you entered does not work! Please try again!");
+			break;
 		}
 		return 0;
 	}
@@ -158,7 +161,11 @@ public class Driver {
 		int option = -1;
 		while(option > 5 || option < 0) {
 			try {
-				option =  Integer.parseInt(sc.next());
+				String optionString =  sc.next();
+				option = Integer.parseInt(optionString);
+				if(option > 5 || option < 0) {
+					System.out.println("The option you entered was wrong, please enter again!");
+				}
 			} catch (Exception e) {
 				System.out.println("The option you entered is not valid, please try again.");
 				System.out.println("What is your option?");

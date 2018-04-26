@@ -96,7 +96,7 @@ public class SearchTripByArrival {
 	}
 	
 	private boolean isValidConnection(Flight firstFlight, Flight secondFlight) {
-		boolean ret = firstFlight.getArrivalAirport().code().equals(secondFlight.getArrivalAirport().code());
+		boolean ret = firstFlight.getArrivalAirport().code().equals(secondFlight.getDepartureAirport().code());
 		long diff = secondFlight.getDepartureTimeGMT().getTimeInMillis() - firstFlight.getArrivalTimeGMT().getTimeInMillis();
 		diff = diff / 60000;
 		ret = ret && diff <= 180 && diff >= 30;

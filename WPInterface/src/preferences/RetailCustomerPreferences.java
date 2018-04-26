@@ -136,7 +136,8 @@ public class RetailCustomerPreferences {
 		System.out.println("What is the Trip Class? (1 - Economy, 2 - First Class)");
 		while(true) {
 			try {
-				int tripClass = Integer.parseInt(sc.next());
+				String tripClassString = sc.next();
+				Integer tripClass = Integer.parseInt(tripClassString);
 				switch (tripClass) {
 				case 1: return SeatClass.COACH;
 				case 2: return SeatClass.FIRSTCLASS;
@@ -165,7 +166,8 @@ public class RetailCustomerPreferences {
 		System.out.println("What is the Date Type? (1 - Departure date, 2 - Arrival date)");
 		while(true) {
 			try {
-				int dateType =  Integer.parseInt(sc.next());
+				String dateTypeString =  sc.next();
+				Integer dateType = Integer.parseInt(dateTypeString);
 				switch (dateType) {
 				case 1: return DateType.DEPARTURE;
 				case 2: return DateType.ARRIVAL;
@@ -246,7 +248,8 @@ public class RetailCustomerPreferences {
 		System.out.println("What is yor trip type? (1 - OneWay, 2 - RoundTrip)");
 		while(true) {
 			try {
-				int tripType =  Integer.parseInt(sc.next());
+				String tripTypeString =  sc.next();
+				int tripType = Integer.parseInt(tripTypeString);
 				switch (tripType) {
 				case 1: return TripType.ONEWAY;
 				case 2: return TripType.ROUNDTRIP;
