@@ -123,7 +123,14 @@ public class Driver {
 		System.out.println("Which trip do you want to pick?");
 		Scanner sc = new Scanner(System.in);
 		int option = -1;
-		option =  Integer.parseInt(sc.next());
+		while(option == -1) {
+			String optionString =  sc.next();
+			option = Integer.parseInt(optionString);
+			if(option < 0 || option >= trips.totalTrips()) {
+				option = -1;
+				System.out.println("The trip number you entered was wrong, please try again!");
+			}
+		}
 		Trip userTrip = trips.getTripForNum(option);
 		return userTrip;
 	}

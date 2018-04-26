@@ -80,6 +80,10 @@ public class Trips extends ArrayList<Trip> {
 		return tripMap.get(tripNum);
 	}
 	
+	public int totalTrips() {
+		return tripMap.size();
+	}
+	
 	/**
 	 * Display the list of available trips.
 	 * Create a hashmap of the available trips to link each trip with a unique integer
