@@ -53,6 +53,10 @@ public class Trips extends ArrayList<Trip> {
 		return createList(2);
 	}
 		
+	/**
+	 * Set a new maximum number of step over by asking a new value to the customer.
+	 * Check if this value is between 0 and 2, continue to ask otherwise.
+	 */
 	public void getNewMaxStepOver(){
 		Scanner sc = new Scanner(System.in);
 		
@@ -76,6 +80,10 @@ public class Trips extends ArrayList<Trip> {
 		return tripMap.get(tripNum);
 	}
 	
+	/**
+	 * Display the list of available trips.
+	 * Create a hashmap of the available trips to link each trip with a unique integer
+	 */
 	public void displayTrips(){
 		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
 		

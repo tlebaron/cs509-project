@@ -70,6 +70,9 @@ public class RetailCustomerPreferences {
 		return arrivalAirport;
 	}
 	
+	/**
+	 * Test function used to print the preferences of a retail customer
+	 */
 	public void printRetailCustomerPreferences() {
 		System.out.println("Trip Class: " + tripClass.toString());
 		System.out.println("Departure Airport: " + departureAirport.toString());
@@ -83,6 +86,12 @@ public class RetailCustomerPreferences {
 		}
 	}
 	
+	/**
+	 * Get the information needed to fill the RetailCustomer object
+	 * 
+	 * @param airports: list of recorded airport, used to check if the airport code provided 
+	 * correspond to a valid airport
+	 */
 	public void getRetailCustomerPreferences(Airports airports){
 		/* Ask the following information, in this order:
 		* Trip type
@@ -116,6 +125,13 @@ public class RetailCustomerPreferences {
 		} 
 	}
 
+	/**
+	 * Record the trip class in the preferences
+	 * 
+	 * @param sc: Scanner
+	 * @return SeatClass chosen by the retail customer
+	 * @throws IOException
+	 */
 	private SeatClass getTripClass(Scanner sc) throws IOException {
 		System.out.println("What is the Trip Class? (1 - Economy, 2 - First Class)");
 		while(true) {
@@ -137,6 +153,14 @@ public class RetailCustomerPreferences {
 		}
 	}
 
+	/**
+	 * Get the date type  wanted by the customer. If departure, the date provided by the customer
+	 * is used as a departure date, if arrival, the date provided by the customer is used as a
+	 * arrival date
+	 * 
+	 * @param sc: Scanner
+	 * @return DateType chosen by the retail customer: departure or arrival
+	 */
 	private DateType getDateType(Scanner sc)  {
 		System.out.println("What is the Date Type? (1 - Departure date, 2 - Arrival date)");
 		while(true) {
@@ -158,6 +182,14 @@ public class RetailCustomerPreferences {
 		}
 	}
 
+	/**
+	 * Get the date of the trip wanted by the customer. See the result of getDateType() to see if
+	 * this date is a departure date or an arrival date
+	 * 
+	 * @param sc: Scanner
+	 * @return Calendar date provided by the customer
+	 * @throws IOException
+	 */
 	private Calendar getDate(Scanner sc) throws IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Please input the date in the following format: MM-dd-yyyy");
@@ -179,6 +211,15 @@ public class RetailCustomerPreferences {
 		}
 	}
 
+	/**
+	 * Get an airport from the customer. Check if the code provided is linked to a known airport, 
+	 * ask for another code is not.
+	 * 
+	 * @param sc: Scanner
+	 * @param airports: list of airports recorded in the initialization
+	 * @param type: departure or arrival
+	 * @return the airport provided by the customer
+	 */
 	private Airport getAirport(Scanner sc, Airports airports, String type) {
 		System.out.println("What is the " + type + " airport?");
 		String departureAirport = sc.next().toUpperCase();
@@ -195,6 +236,12 @@ public class RetailCustomerPreferences {
 		}
 	}
 
+	/**
+	 * Get the type of trip wanted by the customer
+	 * 
+	 * @param sc: Scanner
+	 * @return TripType ONEWAY or ROUNDTRIP
+	 */
 	private TripType getTripType(Scanner sc) {
 		System.out.println("What is yor trip type? (1 - OneWay, 2 - RoundTrip)");
 		while(true) {

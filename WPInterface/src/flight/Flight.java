@@ -17,75 +17,153 @@ public class Flight {
 	Seats firstClassSeating;
 	Airplane airplane;
 	
-	//TODO how to save time? do we separate day, month, time, ...
+
 	Calendar departureTimeGMT;
 	Calendar arrivalTimeGMT;
 	Calendar departureTimeLocal;
 	Calendar arrivalTimeLocal;
 	
+	/** 
+	 * @return Departure Airport of this flight
+	 */
 	public Airport getDepartureAirport() {
 		return this.departureAirport;
 	}
+	/**
+	 * Set the departure airport of this flight to a new airport
+	 * 
+	 * @param Airport
+	 */
 	public void setDepartureAirport(Airport dAirport){
 		this.departureAirport = dAirport;
 	}
 	
+	/**
+	 * @return Arrival airport of this flight
+	 */
 	public Airport getArrivalAirport() {
 		return this.arrivalAirport;
 	}
+	/**
+	 * Set the arrival airport of this flight
+	 * 
+	 * @param Airport
+	 */
 	public void setArrivalAirport(Airport aAirport) {
 		this.arrivalAirport = aAirport;
 	}
 	
+	/**
+	 * @return Flight number of this flight
+	 */
 	public int getFlightNumber(){
 		return this.flightNumber;
 	}
+	/**
+	 * Set the flight number of this flight
+	 * 
+	 * @param flightNumber
+	 */
 	public void setFlightNumber(int number){
 		this.flightNumber = number;
 	}
 	
+	/**
+	 * @return duration of the flight in minutes
+	 */
 	public int getFlightTime(){
 		return this.flightTime;
 	}
+	/**
+	 * Set the duration of the flight. The value of the duration  is given in minutes.
+	 * 
+	 * @param duration
+	 */
 	public void setFlightTime(int time){
 		this.flightTime = time;
 	}
 	
+	/**
+	 * @return the seatClass object used to represent the coach seats of this flight
+	 */
 	public Seats getCoachSeating(){
 		return this.coachSeating;
 	}
+	/**
+	 * Set a new seatClass object as the coach seats for of this plane
+	 * 
+	 * @param Seating
+	 */
 	public void setCoachSeating(Seats cSeating){
 		this.coachSeating = cSeating;
 	}
 	
+	/**
+	 * @return the seatClass object used to represent the first class seats of this flight
+	 */
 	public Seats getFirstClassSeating(){
 		return this.firstClassSeating;
 	}
+	/**
+	 * Set a new seatClass object as the first class seats for of this plane
+	 * 
+	 * @param Seating
+	 */
 	public void setFirstClassSeating(Seats fSeating){
 		this.firstClassSeating = fSeating;
 	}
 	
+	/**
+	 * @return the airplane associated to this flight
+	 */
 	public Airplane getAirplane(){
 		return this.airplane;
 	}
+	/**
+	 * Link this flight to particular airplane, object of the class Airplane
+	 * 
+	 * @param airplane
+	 */
 	public void setAirplane(Airplane plane){
 		this.airplane = plane;
 	}
 	
+	/**
+	 * @return departure time in GMT time
+	 */
 	public Calendar getDepartureTimeGMT(){
 		return this.departureTimeGMT;
 	}
+	/**
+	 * Set the departure time in GMT time
+	 * 
+	 * @param calendar
+	 */
 	public void setDepartureTimeGMT(Calendar time){
 		this.departureTimeGMT = time;
 	}
 	
+	/**
+	 * @return arrival time in GMT time
+	 */
 	public Calendar getArrivalTimeGMT(){
 		return this.arrivalTimeGMT;
 	}
+	/**
+	 * Set the arrival time in GMT time
+	 * 
+	 * @param calendar
+	 */
 	public void setArrivalTimeGMT(Calendar time){
 		this.arrivalTimeGMT = time;
 	}
 	
+	/**
+	 * Get the departure time in local time. If the local time is not already recorded,
+	 * takes the departure time in GMT time to make the conversion and store the time
+	 * 
+	 * @return departure time in local time
+	 */
 	public Calendar getDepartureTimeLocal(){
 		if (this.departureTimeLocal != null) return this.departureTimeLocal;
 		Calendar timeCalendar = (Calendar) departureTimeGMT.clone();
@@ -94,6 +172,12 @@ public class Flight {
 		return timeCalendar;
 	}
 	
+	/**
+	 * Get the arrival time in local time. If the local time is not already recorded,
+	 * takes the arrival time in GMT time to make the conversion and store the time
+	 * 
+	 * @return arrival time in local time
+	 */
 	public Calendar getArrivalTimeLocal(){
 		if (this.arrivalTimeLocal != null) return this.arrivalTimeLocal;
 		Calendar timeCalendar = (Calendar) arrivalTimeGMT.clone();
@@ -102,14 +186,29 @@ public class Flight {
 		return timeCalendar;
 	}
 	
+	/**
+	 * Set departure time in local time
+	 * 
+	 * @param calendar
+	 */
 	public void setDepartureTimeLocal(Calendar time){
 		this.departureTimeLocal = time;
 	}
+	/**
+	 * Set arrival time in local time
+	 * 
+	 * @param calendar
+	 */
 	public void setArrivalTimeLocal(Calendar time){
 		this.arrivalTimeLocal = time;
 	}
 	
-	
+	/**
+	 * Return the price of the seat in the flight corresponding to the class in input
+	 * 
+	 * @param seatClass
+	 * @return price, -1 if the seatClass is not valid
+	 */
 	public double getPrice(SeatClass seatClass) {
 		switch(seatClass) {
 			case COACH:
