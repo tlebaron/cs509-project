@@ -222,17 +222,18 @@ public class RetailCustomerPreferences {
 	 */
 	private Airport getAirport(Scanner sc, Airports airports, String type) {
 		System.out.println("What is the " + type + " airport?");
-		String departureAirport = sc.next().toUpperCase();
+		String selectedAirport = sc.next().toUpperCase();
 		// validate that airport exists
 		while(true) {
 			for (Airport airport : airports) {
-				if(airport.code().equals(departureAirport)) {
+				if(airport.code().equals(selectedAirport)) {
+					if (type == "arrival" && departureAirport.code().equals(selectedAirport)) break;
 					return airport;
 				}
 			}
 			System.out.println("The airport you entered does not match any airport on the database.");
 			System.out.println("What is the " + type + " airport?");
-			departureAirport = sc.next().toUpperCase();
+			selectedAirport = sc.next().toUpperCase();
 		}
 	}
 
