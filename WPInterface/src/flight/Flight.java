@@ -272,6 +272,15 @@ public class Flight {
 		Calendar departureTimeLocal = this.getDepartureTimeLocal();
 		Calendar arrivalTimeLocal = this.getArrivalTimeLocal();
 		
+		String departureHourLocal = Integer.toString(departureTimeLocal.get(Calendar.HOUR));
+		if (departureHourLocal.length()<2) departureHourLocal = "0"+departureHourLocal;
+		String departureMinuteLocal = Integer.toString(departureTimeLocal.get(Calendar.MINUTE));
+		if (departureMinuteLocal.length()<2) departureMinuteLocal = "0"+departureMinuteLocal;
+		String arrivalHourLocal = Integer.toString(arrivalTimeLocal.get(Calendar.HOUR));
+		if (arrivalHourLocal.length()<2) arrivalHourLocal = "0"+arrivalHourLocal;
+		String arrivalMinuteLocal = Integer.toString(arrivalTimeLocal.get(Calendar.MINUTE));
+		if (arrivalMinuteLocal.length()<2) arrivalMinuteLocal = "0"+arrivalMinuteLocal;
+		
 		//sb.append(manufacturer).append(", ");
 		//sb.append(Integer.toString(coachSeats.numberOfSeats)).append(", ");
 		sb.append("Flight number: "+Integer.toString(flightNumber) + "\n");
@@ -280,10 +289,10 @@ public class Flight {
 		sb.append("Duration: "+Integer.toString(flightTime)+" minutes\n");
 		sb.append("Number of first class seats booked: "+Integer.toString(firstClassSeating.getNumberOfSeats())+ " at $" + Double.toString(firstClassSeating.price)  + "\n");
 		sb.append("Number of economy seats booked: "+Integer.toString(coachSeating.getNumberOfSeats())+ " at $" + Double.toString(coachSeating.price)  + "\n");
-		sb.append("Departure Time (GMT): "+departureTimeGMT.get(Calendar.MONTH)+"/"+departureTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeGMT.get(Calendar.YEAR)+" at "+departureHour+":"+departureMinute + "\n");
-		sb.append("Arrival Time (GMT): "+arrivalTimeGMT.get(Calendar.MONTH)+"/"+arrivalTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeGMT.get(Calendar.YEAR)+" at "+arrivalHour+":" + arrivalMinute + "\n");
-		sb.append("Departure Time (Local): "+departureTimeLocal.get(Calendar.MONTH)+"/"+departureTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeLocal.get(Calendar.YEAR)+" at "+departureTimeLocal.get(Calendar.HOUR)+":"+departureTimeLocal.get(Calendar.MINUTE) + "\n");
-		sb.append("Arrival Time (Local): "+arrivalTimeLocal.get(Calendar.MONTH)+"/"+arrivalTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeLocal.get(Calendar.YEAR)+" at "+arrivalTimeLocal.get(Calendar.HOUR)+":"+arrivalTimeLocal.get(Calendar.MINUTE) + "\n");
+		sb.append("Departure Time (GMT): "+ (departureTimeGMT.get(Calendar.MONTH) + 1) +"/"+departureTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeGMT.get(Calendar.YEAR)+" at "+departureHour+":"+departureMinute + "\n");
+		sb.append("Arrival Time (GMT): "+ (arrivalTimeGMT.get(Calendar.MONTH) + 1) +"/"+arrivalTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeGMT.get(Calendar.YEAR)+" at "+arrivalHour+":" + arrivalMinute + "\n");
+		sb.append("Departure Time (Local): "+ (departureTimeLocal.get(Calendar.MONTH) + 1) +"/"+departureTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeLocal.get(Calendar.YEAR)+" at "+departureHourLocal+":"+departureMinuteLocal + "\n");
+		sb.append("Arrival Time (Local): "+ (arrivalTimeLocal.get(Calendar.MONTH) + 1) +"/"+arrivalTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeLocal.get(Calendar.YEAR)+" at "+arrivalHourLocal+":"+arrivalMinuteLocal + "\n");
 		sb.append("----------");
 
 		return sb.toString();
