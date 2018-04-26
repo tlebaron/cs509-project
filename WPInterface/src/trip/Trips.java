@@ -84,11 +84,16 @@ public class Trips extends ArrayList<Trip> {
 	 * Display the list of available trips.
 	 * Create a hashmap of the available trips to link each trip with a unique integer
 	 */
-	public void displayTrips(){
+	public int displayTrips(){
 		RetailCustomerPreferences preferences = RetailCustomerPreferences.getInstance();
 		
+		if (this.size() == 0){
+			System.out.println("No trips available, please try with other options");
+			return 0;
+		}
 		
 		System.out.println("Available trips:" + this.size());
+		
 		System.out.println("ID \t|\t Departure \t|\t Arrival \t|\t "
 				+ "Duration \t|     Price \t|\t Dearture Time \t|\t Arrival Time  \t|\t "
 				+ "Seats \t|");
@@ -118,6 +123,6 @@ public class Trips extends ArrayList<Trip> {
 			System.out.println(sb);
 		}
 		
-		
+		return 1;
 	}
 }
