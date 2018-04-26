@@ -338,15 +338,29 @@ public class Airplane {
 		}
 		return isValidNum_firstClassSeats (temp_num);
 	}
-	
+	/**
+	 * Get the class of coach seats on the airplane
+	 * 
+	 * @return The coach seats class
+	 */
 	public Seats getCoachSeats(){
 		return this.coachSeats;
 	}
-	
+	/**
+	 * Get the firstClass on the airplane
+	 * 
+	 * @return The firstClass 
+	 */
 	public Seats getFirstClassSeats(){
 		return this.firstClassSeats;
 	}
 	
+	/**
+	 * Get the price of certain SeatClass on the airplane
+	 * 
+	 * @param seatClass is straight forward, COACH or FIRSTCLASS
+	 * @return The price of that SeatClass, error with -1
+	 */
 	public double getPrice(SeatClass seatClass) {
 		switch(seatClass) {
 			case COACH:

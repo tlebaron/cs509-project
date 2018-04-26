@@ -128,6 +128,7 @@ public class reserve {
 			Document message = db.newDocument();
 			Element root = message.createElement("Flights");
 			message.appendChild(root);
+			
 			for(int j=0;j<this.getNumFlights();j++){
 				flight=this.getFlight(j);
 				flight_xml=message.createElement("Flight");
@@ -140,7 +141,8 @@ public class reserve {
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			StringWriter writer = new StringWriter();
 			transformer.transform(new DOMSource(message), new StreamResult(writer));
-
+			
+			// book ticket and judge whether it was successful
 			if(mSI.reserve_ticket(teamName, writer.toString())){
 				mSI.unlock(teamName);
 				return true;
