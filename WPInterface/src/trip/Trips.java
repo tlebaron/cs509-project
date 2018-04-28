@@ -49,6 +49,7 @@ public class Trips extends ArrayList<Trip> {
 		
 		return hashList;
 	}
+	
 	public HashMap<Integer, Trip> createList(){
 		return createList(2);
 	}
@@ -74,6 +75,14 @@ public class Trips extends ArrayList<Trip> {
 				continue;
 			}
 		}
+	}
+	
+	/**
+	 * Set a new maximum number of step over by asking a new value to the customer.
+	 * Check if this value is between 0 and 2, continue to ask otherwise.
+	 */
+	public void setNewMaxStepOver(Integer maxStopOver){
+		this.maxStepOver = maxStopOver;
 	}
 	
 	public Trip getTripForNum(Integer tripNum) {

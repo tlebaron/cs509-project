@@ -201,27 +201,35 @@ public class Driver {
 		initializeAirports();
 		retailCustomerPreferences.getRetailCustomerPreferences(airports);
 		//retailCustomerPreferences.printRetailCustomerPreferences();
-		initializeTimeOffsets();
+		initializeTimeOffsets(true);
 		initializeAirplanes();
 	}
 	
-	private static void initializeAirports() {
+	public static void initializeAirports() {
 		// Try to get a list of airports
 		airports = ServerInterface.INSTANCE.getAirports(teamName);
 		Collections.sort(airports);
 	}
 	
-	private static void initializeTimeOffsets() {
+	public Airports getAirports() {
+		return this.airports;
+	}
+	
+	public static void initializeTimeOffsets(boolean callInterface) {
 		GMTConversionInterface gmtInterface;
 		for(Airport a : airports) {
 			gmtInterface = new GMTConversionInterface();
-			String timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
-			//String timeZone = "GMT";
+			String timeZone;
+			if(callInterface) {
+				timeZone = gmtInterface.getTimeZone(a.latitude(), a.longitude(), retailCustomerPreferences.searchDate());
+			} else {
+				timeZone = "GMT";
+			}
 			a.setTimeZoneID(timeZone);
 		}
 	}
 	
-	private static void initializeAirplanes() {
+	public static void initializeAirplanes() {
 		//System.out.println("\nPrint airplanes");
 		//System.out.println("Manu\tModel\t#coach\t#1stclass");
 		// try print out airplanes to check if we are doing everything right
@@ -242,5 +250,10 @@ public class Driver {
 		else {
 			System.out.println("Something went wrong, unable to book the seat, plz try again later.");
 		}
+	}
+
+	public Airplanes getAirplanes() {
+		// TODO Auto-generated method stub
+		return this.airplanes;
 	}
 }

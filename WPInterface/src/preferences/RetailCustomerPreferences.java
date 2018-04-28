@@ -28,7 +28,7 @@ public class RetailCustomerPreferences {
 	//the sorting? It doesn't make sense to store it here.
 	int maxLayover;
 	
-	protected RetailCustomerPreferences() {
+	public RetailCustomerPreferences() {
 		
 	}
 	
@@ -50,6 +50,10 @@ public class RetailCustomerPreferences {
 		return searchDate;
 	}
 	
+	public void setSearchDate(Calendar date) {
+		this.searchDate = date;
+	}
+	
 	public Calendar searchReturnDate() {
 		return returnDate;
 	}
@@ -58,16 +62,31 @@ public class RetailCustomerPreferences {
 		return searchDateType;
 	}
 	
+	public void setSearchDateType(DateType t) {
+		this.searchDateType = t;
+	}
+	
 	public TripType searchTripType() {
 		return tripType;
+	}
+	
+	public void setTripType(TripType t) {
+		this.tripType = t;
 	}
 	
 	public Airport departureAirport() {
 		return departureAirport;
 	}
+	public void setDepartureAirport(Airport a) {
+		this.departureAirport = a;
+	}
 	
 	public Airport arrivalAirport() {
 		return arrivalAirport;
+	}
+	
+	public void setArrivalAirport(Airport a) {
+		this.arrivalAirport = a;
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import flight.Flight;
 import static java.lang.Math.toIntExact;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -114,6 +115,13 @@ public class Trip {
 	public long getArrivalTimeGMT(){
 		return flights.get(flights.size()-1).getArrivalTimeGMT().getTime().getTime();
 	}
+	/**
+	 * @return time of arrival of the last flight in GMT in milliseconds
+	 */
+	public Calendar getArrivalTimeGMTTest(){
+		return flights.get(flights.size()-1).getArrivalTimeGMT();
+	}
+	
 	/**
 	 * @return time of departure of the first flight in local time in milliseconds
 	 */
