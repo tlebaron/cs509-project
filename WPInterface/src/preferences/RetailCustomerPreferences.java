@@ -16,7 +16,7 @@ public class RetailCustomerPreferences {
 	
 	private static RetailCustomerPreferences instance = null;
 	
-	public SeatClass tripClass;
+	private SeatClass tripClass;
 	Airport departureAirport;
 	Airport arrivalAirport;
 	Calendar searchDate;

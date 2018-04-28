@@ -41,11 +41,11 @@ public class TestDriver {
 		flight3.setDepartureTimeGMT(dep);
 		flight3.setArrivalTimeGMT(arr3);
 		Trip trip1 = new Trip();
-		trip1.flights.add(flight1);
+		trip1.addFlight(flight1);
 		Trip trip2 = new Trip();
-		trip2.flights.add(flight2);
+		trip2.addFlight(flight2);
 		Trip trip3 = new Trip();
-		trip3.flights.add(flight3);
+		trip3.addFlight(flight3);
 		
 		Trips trips = new Trips();
 		trips.add(trip1);

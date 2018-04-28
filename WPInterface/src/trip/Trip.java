@@ -15,7 +15,7 @@ import seat.SeatClass;
 public class Trip {
 	TripType type;
 	Trip followingTrip;
-	public Flights flights;
+	Flights flights;
 	
 	public Trip(){
 		flights = new Flights();
@@ -186,7 +186,6 @@ public class Trip {
 	}
 
 	public void setReturnTrip(Trip returnSelectedTrip) {
-		// TODO Auto-generated method stub
 		this.followingTrip = returnSelectedTrip;
 	}
 }

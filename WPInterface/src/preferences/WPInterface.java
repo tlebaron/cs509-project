@@ -16,7 +16,6 @@ import utils.QueryFactory;
 public class WPInterface {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 		
 		//call the database to get the airports.
 		Airport depart = new Airport(); //BOS

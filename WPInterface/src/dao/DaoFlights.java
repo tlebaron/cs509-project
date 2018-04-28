@@ -167,9 +167,9 @@ public class DaoFlights {
 		String arrivalAirportCode;
 		
 		Seats coachSeat = new Seats();
-		coachSeat.seatClass = SeatClass.COACH;
+		coachSeat.setSeatClass(SeatClass.COACH);
 		Seats firstClassSeat = new Seats();
-		firstClassSeat.seatClass = SeatClass.FIRSTCLASS;
+		firstClassSeat.setSeatClass(SeatClass.FIRSTCLASS);
 		
 		String xmlTime;
 		String xmlSeat;
@@ -227,7 +227,7 @@ public class DaoFlights {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		firstClassSeat.price = n.doubleValue();
+		firstClassSeat.setPrice(n.doubleValue());
 		//number
 		firstClassSeat.setNumberOfSeats(Integer.parseInt(getCharacterDataFromElement(elementSFC)));
 		
@@ -237,7 +237,7 @@ public class DaoFlights {
 		//price
 		xmlSeat = elementSC.getAttributeNode("Price").getValue();
 		xmlSeat = xmlSeat.substring(1);
-		coachSeat.price = Double.parseDouble(xmlSeat);
+		coachSeat.setPrice(Double.parseDouble(xmlSeat));
 		//number
 		coachSeat.setNumberOfSeats(Integer.parseInt(getCharacterDataFromElement(elementSC)));
 		

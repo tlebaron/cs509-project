@@ -246,8 +246,8 @@ public class Flight {
 		//if(arrivalTimeGMT)
 		if(coachSeating.getNumberOfSeats() < 0) return false;
 		if(firstClassSeating.getNumberOfSeats() < 0) return false;
-		if(coachSeating.price < 0) return false;
-		if(firstClassSeating.price < 0) return false;
+		if(coachSeating.getPrice() < 0) return false;
+		if(firstClassSeating.getPrice() < 0) return false;
 		
 		return true;
 	}
@@ -287,8 +287,8 @@ public class Flight {
 		sb.append("Departure: "+departureAirport.code() + "\n");
 		sb.append("Arrival: "+arrivalAirport.code() + "\n");
 		sb.append("Duration: "+Integer.toString(flightTime)+" minutes\n");
-		sb.append("Number of first class seats booked: "+Integer.toString(firstClassSeating.getNumberOfSeats())+ " at $" + Double.toString(firstClassSeating.price)  + "\n");
-		sb.append("Number of economy seats booked: "+Integer.toString(coachSeating.getNumberOfSeats())+ " at $" + Double.toString(coachSeating.price)  + "\n");
+		sb.append("Number of first class seats booked: "+Integer.toString(firstClassSeating.getNumberOfSeats())+ " at $" + Double.toString(firstClassSeating.getPrice())  + "\n");
+		sb.append("Number of economy seats booked: "+Integer.toString(coachSeating.getNumberOfSeats())+ " at $" + Double.toString(coachSeating.getPrice())  + "\n");
 		sb.append("Departure Time (GMT): "+ (departureTimeGMT.get(Calendar.MONTH) + 1) +"/"+departureTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeGMT.get(Calendar.YEAR)+" at "+departureHour+":"+departureMinute + "\n");
 		sb.append("Arrival Time (GMT): "+ (arrivalTimeGMT.get(Calendar.MONTH) + 1) +"/"+arrivalTimeGMT.get(Calendar.DAY_OF_MONTH)+"/"+arrivalTimeGMT.get(Calendar.YEAR)+" at "+arrivalHour+":" + arrivalMinute + "\n");
 		sb.append("Departure Time (Local): "+ (departureTimeLocal.get(Calendar.MONTH) + 1) +"/"+departureTimeLocal.get(Calendar.DAY_OF_MONTH)+"/"+departureTimeLocal.get(Calendar.YEAR)+" at "+departureHourLocal+":"+departureMinuteLocal + "\n");

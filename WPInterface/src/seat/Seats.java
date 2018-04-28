@@ -1,9 +1,9 @@
 package seat;
 
 public class Seats {
-	public double price;
+	double price;
 	int numberOfSeats;
-	public SeatClass seatClass;
+	SeatClass seatClass;
 	
 	public int getNumberOfSeats(){
 		return this.numberOfSeats;
@@ -18,5 +18,13 @@ public class Seats {
 	
 	public void setPrice(double p){
 		price = p;
+	}
+	
+	public SeatClass getSeatClass() {
+		return this.seatClass;
+	}
+	
+	public void setSeatClass(SeatClass classtype) {
+		seatClass = classtype;
 	}
 }

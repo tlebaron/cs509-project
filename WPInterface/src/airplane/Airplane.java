@@ -41,13 +41,13 @@ public class Airplane {
 		
 		coachSeats = new Seats();
 		coachSeats.setNumberOfSeats(0);
-		coachSeats.seatClass = SeatClass.COACH;
-		coachSeats.price = 0;
+		coachSeats.setSeatClass(SeatClass.COACH);
+		coachSeats.setPrice(0);;
 		
 		firstClassSeats = new Seats();
 		firstClassSeats.setNumberOfSeats(0);
-		firstClassSeats.seatClass = SeatClass.FIRSTCLASS;
-		firstClassSeats.price = 0;
+		firstClassSeats.setSeatClass(SeatClass.FIRSTCLASS);
+		firstClassSeats.setPrice(0);;
 	}
 	
 	/**

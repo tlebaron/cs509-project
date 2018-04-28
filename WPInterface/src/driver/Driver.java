@@ -139,7 +139,7 @@ public class Driver {
 		SortTrips sorter = new SortTrips();
 		switch(userOption) {
 		case 0: // sort by price
-			trips = sorter.sortByPrice(trips, retailCustomerPreferences.tripClass);
+			trips = sorter.sortByPrice(trips, retailCustomerPreferences.getTripClass());
 			break;
 		case 1:  // sort by total time
 			trips = sorter.sortByTravelTime(trips);
@@ -253,7 +253,6 @@ public class Driver {
 	}
 
 	public Airplanes getAirplanes() {
-		// TODO Auto-generated method stub
 		return this.airplanes;
 	}
 }
