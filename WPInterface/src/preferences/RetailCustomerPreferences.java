@@ -24,8 +24,6 @@ public class RetailCustomerPreferences {
 	TripType tripType;
 	DateType searchReturnDateType;
 	Calendar returnDate;
-	// Do we have this here ?? Shouldn't be better to have a "default parameters" for the layover and
-	//the sorting? It doesn't make sense to store it here.
 	int maxLayover;
 	
 	public RetailCustomerPreferences() {
@@ -139,7 +137,6 @@ public class RetailCustomerPreferences {
 			}
 			tripClass = getTripClass(sc);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 	}
@@ -212,7 +209,6 @@ public class RetailCustomerPreferences {
 	 * @throws IOException
 	 */
 	private Calendar getDate(Scanner sc) throws IOException {
-		// TODO Auto-generated method stub
 		System.out.println("Please input the date in the following format: MM-dd-yyyy");
 		String dateString = sc.next();
 		

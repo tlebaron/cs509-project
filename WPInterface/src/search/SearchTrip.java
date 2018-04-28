@@ -41,7 +41,6 @@ public class SearchTrip {
   }
 
 	public Trips searchReturn(String teamName) {
-		// TODO Auto-generated method stub
 		Trips trips;
 		if(retailCustomerPreferences.searchDateType() == DateType.ARRIVAL) {
 			SearchTripByArrival search = new SearchTripByArrival(retailCustomerPreferences.arrivalAirport(), retailCustomerPreferences.departureAirport(), retailCustomerPreferences.searchReturnDate(), this.airports, this.airplanes);

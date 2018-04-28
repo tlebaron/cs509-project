@@ -28,7 +28,6 @@ public class SearchTripByDeparture {
 	}
 	
 	Trips searchTripsByDepartureAirport(String teamName) {
-		// TODO Auto-generated method stub
 		Flights firstLegFlights = searchFirstLegFlights(teamName, this.date);
 		//System.out.println("First leg flights: " + firstLegFlights.size());
 		Trips collectOneLeg = findOneLegTrips(firstLegFlights, this.departureAirport, this.arrivalAirport);
@@ -108,7 +107,6 @@ public class SearchTripByDeparture {
 	}
 	
 	private Trips findOneLegTrips(Flights firstLegFlights, Airport departureAirport, Airport arrivalAirport) {
-		// TODO Auto-generated method stub
 		Trips oneLegTrips = new Trips();
 		for (Flight flight : firstLegFlights) {
 			if (flight.getArrivalAirport().code().equals(arrivalAirport.code())) {
